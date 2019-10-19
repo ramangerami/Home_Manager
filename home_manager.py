@@ -1,4 +1,5 @@
 from home_stats import HomeStats
+from abstract_home import AbstractHome
 from detached_home import DetachedHome
 from condo import Condo
 
@@ -81,7 +82,7 @@ class HomeManager:
                 condos += 1
         years = 0
         if len(years_list) > 0:
-            years = sum(years_list) / len(years_list)
+            years = int(sum(years_list) / len(years_list))
         stats = HomeStats(total_homes, detached_homes, condos, years)
         return stats
                 
@@ -112,5 +113,5 @@ class HomeManager:
     def _validate_home_input(cls, display_name, home_val):
         """ Used to validate a variable is an instance of a class that extends AbstractHome """
         cls._validate_general_input(display_name, home_val)
-        if not isinstance(type(home_val), AbstractHome):
+        if not issubclass(type(home_val), AbstractHome):
             raise ValueError(display_name + " must be a class that extends AbstractHome.")

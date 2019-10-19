@@ -32,7 +32,7 @@ class Condo(AbstractHome):
         description = "This is a " + str(self._square_footage) + " square foot condo " + "built in " + str(self._year_built)\
             + " " + "with " + str(self._number_of_rooms) + " rooms, "\
             + str(self._number_of_bathrooms) + " bathrooms"\
-            + " and a monthly strata fee of " + str(self._monthly_strata_fee) + ". " + " This home is being sold by "\
+            + " and a monthly strata fee of " + str(self._monthly_strata_fee) + ". This home is being sold by "\
             + self._selling_agent
         return description
 

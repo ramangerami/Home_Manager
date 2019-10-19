@@ -11,7 +11,7 @@ class DetachedHome(AbstractHome):
 
     def __init__(self, square_feet, year_built, rooms, bathrooms, city, seller, tax, floors, has_suite):
         """ Constructor for Condo object """
-        super().__init__(home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax)
+        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax)
 
         AbstractHome._validate_int_input(DetachedHome.FLOORS_LABEL, floors)
         self._number_of_floors = floors
@@ -32,7 +32,7 @@ class DetachedHome(AbstractHome):
         description = "This is a " + str(self._square_footage) + " square foot home " + "built in " + str(self._year_built)\
             + " " + "with " + str(self._number_of_floors) + " floors, " + str(self._number_of_rooms) + " rooms, "\
             + str(self._number_of_bathrooms) + " bathrooms"\
-            + " and a yearly property tax of " + str(self._yearly_property_tax) + ". " + " This home is being sold by "\
+            + " and a yearly property tax of " + str(self._yearly_property_tax) + ". This home is being sold by "\
             + self._selling_agent
         return description
 

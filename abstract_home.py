@@ -24,7 +24,7 @@ class AbstractHome:
         AbstractHome._validate_int_input(AbstractHome.NUM_ROOMS_LABEL, rooms)
         self._number_of_rooms = rooms
 
-        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, bathrooms)
+        AbstractHome._validate_int_input(AbstractHome.NUM_BATHROOMS_LABEL, bathrooms)
         self._number_of_bathrooms = bathrooms
 
         AbstractHome._validate_string_input(AbstractHome.CITY_LABEL, city)
@@ -77,7 +77,7 @@ class AbstractHome:
 
     def get_years_old(self):
         """ Returns the age of a home object, assuming the current year is 2019 """
-        years_old = self.get_year_built() - AbstractHome.CURRENT_YEAR
+        years_old = AbstractHome.CURRENT_YEAR - self.get_year_built()
         return years_old
 
     def get_description(self):
