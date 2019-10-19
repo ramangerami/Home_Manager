@@ -1,6 +1,6 @@
 class AbstractHome:
     """ Representation of a home object, with relevant details to buyers/sellers """
-
+    
     HOME_ID_LABEL = "Home ID"
     SQUARE_FOOTAGE_LABEL = "Square Footage"
     YEAR_BUILD_LABEL = "Year Build"
@@ -14,20 +14,26 @@ class AbstractHome:
 
     def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax):
         """ Constructor for an Abstract Home Object """
-        AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
-        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, year_built)
-        AbstractHome._validate_int_input(AbstractHome.NUM_ROOMS_LABEL, rooms)
-        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, bathrooms)
-        AbstractHome._validate_string_input(AbstractHome.CITY_LABEL, city)
-        AbstractHome._validate_string_input(AbstractHome.SELLING_AGENT_LABEL, seller)
-        AbstractHome._validate_float_input(AbstractHome.YEARLY_TAX_LABEL, tax)
 
+        AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
         self._square_footage = square_feet
+
+        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, year_built)
         self._year_built = year_built
+
+        AbstractHome._validate_int_input(AbstractHome.NUM_ROOMS_LABEL, rooms)
         self._number_of_rooms = rooms
+
+        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, bathrooms)
         self._number_of_bathrooms = bathrooms
+
+        AbstractHome._validate_string_input(AbstractHome.CITY_LABEL, city)
         self._city = city
+
+        AbstractHome._validate_string_input(AbstractHome.SELLING_AGENT_LABEL, seller)
         self._selling_agent = seller
+
+        AbstractHome._validate_float_input(AbstractHome.YEARLY_TAX_LABEL, tax)
         self._yearly_property_tax = tax
 
         self._home_id = None
