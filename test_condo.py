@@ -141,7 +141,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(self.condo.get_monthly_strata_fee(), 800, "Condo must have valid monthly fee")
 
     def test_condo_get_pets_allowed(self):
-        """ 130A - Getting square footage """
+        """ 130A - Getting whether pets are allowed """
         self.assertEqual(self.condo.get_pets_allowed(), False, "Condo must have valid pets allowed flag")
 
     def test_get_years_old_positive(self):
