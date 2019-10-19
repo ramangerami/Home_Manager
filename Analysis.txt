@@ -1,0 +1,6 @@
+Answer the following two questions:
+ How does your design implement the four pillars of OOP (abstraction, encapsulation, inheritance and composition, and polymorphism).
+    #TODO
+
+ Why are your entity classes good abstractions (i.e., models) of the real-world entities?
+    #TODO
