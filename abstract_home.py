@@ -106,21 +106,21 @@ class AbstractHome:
              
     @classmethod
     def _validate_int_input(cls, display_name, int_val):
-        """ Used to validate a string variable """
+        """ Used to validate a integer variable """
         cls._validate_general_input(display_name, int_val)
         if type(int_val) is not int:
             raise ValueError(display_name + " must be of type: Integer.")
              
     @classmethod
     def _validate_bool_input(cls, display_name, bool_val):
-        """ Used to validate a string variable """
+        """ Used to validate a boolean variable """
         cls._validate_general_input(display_name, bool_val)
         if type(bool_val) is not bool:
             raise ValueError(display_name + " must be of type: Boolean.")
              
     @classmethod
     def _validate_home_input(cls, display_name, home_val):
-        """ Used to validate a string variable """
+        """ Used to validate a variable is an instance of a class that extends AbstractHome """
         cls._validate_general_input(display_name, home_val)
         if not isinstance(type(home_val), AbstractHome):
             raise ValueError(display_name + " must be a class that extends AbstractHome.")
