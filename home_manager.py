@@ -1,4 +1,6 @@
 from home_stats import HomeStats
+from detached_home import DetachedHome
+from condo import Condo
 
 class HomeManager:
     """ Manages Home Objects """
@@ -18,7 +20,7 @@ class HomeManager:
         home.set_id(self._next_available_id)
         self._home_listings.append(home)
         self._next_available_id += 1
-
+        return self._next_available_id - 1
 
     def get_home_by_id(self, id_number):
         """ Returns a home in the listings based on id, returns none if it doesn't exist in the listings """
@@ -64,6 +66,24 @@ class HomeManager:
                 self._home_listings.remove(home)
                 break
 
+    def get_listing_stats(self):
+        """ Generates a HomeStats from a listing of homes """
+        total_homes = 0
+        detached_homes = 0
+        condos = 0
+        years_list = []
+        for home in self._home_listings:
+            total_homes += 1
+            years_list.append(home.get_years_old())
+            if home.get_type() == DetachedHome.DETACHED_HOME_TYPE:
+                detached_homes += 1
+            elif home.get_type() == Condo.CONDO_TYPE:
+                condos += 1
+        years = 0
+        if len(years_list) > 0:
+            years = sum(years_list) / len(years_list)
+        stats = HomeStats(total_homes, detached_homes, condos, years)
+        return stats
                 
                 
     @classmethod
