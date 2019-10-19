@@ -97,15 +97,8 @@ class TestCondo(unittest.TestCase):
         # Must reject invalid parameter
         self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.home_manager.get_home_by_id, test_string)
 
-
-    def test_get_all_homes_empty(self):
-        """ 040A - Getting all homes of an empty home manager """
-        all_homes = self.home_manager.get_all_homes()
-        self.assertEqual(all_homes, [])
-        self.assertEqual(len(all_homes), 0)
-
     def test_get_all_homes_full(self):
-        """ 040B - Getting all homes of an populated home manager """
+        """ 040A - Getting all homes of a populated home manager """
         self.home_manager.add_home(self.condo1)
         self.home_manager.add_home(self.condo2)
         self.home_manager.add_home(self.detached_home1)
@@ -114,7 +107,69 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(all_homes, [self.condo1, self.condo2, self.detached_home1])
         self.assertEqual(len(all_homes), 3)
 
+
+    def test_get_all_homes_empty(self):
+        """ 040B - Getting all homes of an empty home manager """
+        all_homes = self.home_manager.get_all_homes()
+        self.assertEqual(all_homes, [])
+        self.assertEqual(len(all_homes), 0)
+        
+    def test_get_all_homes_by_type_full(self):
+        """ 050B - Getting all homes of valid type of a populated home manager """
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.condo2)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.detached_home3)
+        self.home_manager.add_home(self.detached_home2)
+
+        condos = self.home_manager.get_all_homes_by_type("condo")
+        self.assertEqual(condos, [self.condo1, self.condo2])
+        self.assertEqual(len(condos), 2)
+        detacheds = self.home_manager.get_all_homes_by_type("detached home")
+        self.assertEqual(detacheds, [self.detached_home1, self.detached_home3, self.detached_home2])
+        self.assertEqual(len(detacheds), 3)
+
+    def test_get_all_homes_by_type_empty(self):
+        """ 050B - Getting all homes of valid type of an empty home manager """
+        condos = self.home_manager.get_all_homes_by_type("condo")
+        detacheds = self.home_manager.get_all_homes_by_type("detached home")
+
+        self.assertEqual(condos, [])
+        self.assertEqual(len(condos), 0)
+
+        self.assertEqual(detacheds, [])
+        self.assertEqual(len(detacheds), 0)
+        
+    def test_get_all_homes_by_type_invalid(self):
+        """ 050B - Getting all homes with invalid parameter """
+        undefined_input = None
+        # Must reject undefined parameter
+        self.assertRaisesRegex(ValueError, "Type of Home cannot be undefined", self.home_manager.get_all_homes_by_type, undefined_input)
+
+        test_int = 25
+        # Must reject invalid parameter
+        self.assertRaisesRegex(ValueError, "Type of Home must be of type: String", self.home_manager.get_all_homes_by_type, test_int)
+
+        empty_string = ""
+        # Must reject empty string
+        self.assertRaisesRegex(ValueError, "Type of Home cannot be empty string", self.home_manager.get_all_homes_by_type, empty_string)
+        
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.detached_home3)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.condo2)
+        self.home_manager.add_home(self.detached_home2)
+
+        # Must reject undefined parameter
+        self.assertRaisesRegex(ValueError, "Type of Home cannot be undefined", self.home_manager.get_all_homes_by_type, undefined_input)
+
+        # Must reject invalid parameter
+        self.assertRaisesRegex(ValueError, "Type of Home must be of type: String", self.home_manager.get_all_homes_by_type, test_int)
+
+        # Must reject empty string
+        self.assertRaisesRegex(ValueError, "Type of Home cannot be empty string", self.home_manager.get_all_homes_by_type, empty_string)
     
+
 
 
         
