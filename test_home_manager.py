@@ -141,7 +141,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(len(detacheds), 0)
         
     def test_get_all_homes_by_type_invalid(self):
-        """ 050B - Getting all homes with invalid parameter """
+        """ 05BC - Getting all homes with invalid parameter """
         undefined_input = None
         # Must reject undefined parameter
         self.assertRaisesRegex(ValueError, "Type of Home cannot be undefined", self.home_manager.get_all_homes_by_type, undefined_input)
@@ -169,8 +169,83 @@ class TestCondo(unittest.TestCase):
         # Must reject empty string
         self.assertRaisesRegex(ValueError, "Type of Home cannot be empty string", self.home_manager.get_all_homes_by_type, empty_string)
     
+        
+    def test_update_home_valid(self):
+        """ 060A - Updating a home in the list """
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.detached_home3)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.condo2)
+        self.home_manager.add_home(self.detached_home2)
 
+        id = self.condo1.get_id()
+        self.assertEqual(self.home_manager.get_home_by_id(id), self.condo1)
+        self.condo2.set_id(id)
+        self.home_manager.update_home(self.condo2)
+        self.assertEqual(self.home_manager.get_home_by_id(id), self.condo2)
 
+    def test_update_home_invalid(self):
+        """ 060B - Updating an invalid home in the list """
+        self.detached_home3.set_id(0)
+        self.assertEqual(self.detached_home3.get_id(), 0)
+
+        # Must reject home that is not in the manager
+        self.assertRaisesRegex(ValueError, "Given Home's ID must match one in the listings to update.", self.home_manager.update_home, self.detached_home3)
+        
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.condo2)
+
+        self.condo3.set_id(5)
+        self.assertEqual(self.condo3.get_id(), 5)
+        # Must reject home that is not in the manager
+        self.assertRaisesRegex(ValueError, "Given Home's ID must match one in the listings to update.", self.home_manager.update_home, self.condo3)
+
+        undefined_input = None
+        # Must reject undefined parameter
+        self.assertRaisesRegex(ValueError, "Home object cannot be undefined", self.home_manager.update_home, undefined_input)
+        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.home_manager.update_home, self.detached_home2)
+
+        test_string = "Hello"
+        # Must reject invalid parameter
+        self.assertRaisesRegex(ValueError, "Home object must be a class that extends AbstractHome.", self.home_manager.update_home, test_string)
+        
+    def test_delete_home_valid(self):
+        """ 070A - Deleting a home in the list """
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.condo2)
+        self.home_manager.add_home(self.detached_home2)
+
+        all_homes = self.home_manager.get_all_homes()
+        self.assertEqual(len(all_homes), 4)
+        self.home_manager.delete_home(3)
+        self.assertEqual(len(all_homes), 3)
+        self.home_manager.delete_home(1)
+        self.assertEqual(len(all_homes), 2)
+
+    def test_delete_home_invalid(self):
+        """ 070B - Deleting an invalid home in the list """
+
+        # Must reject home that is not in the manager
+        self.assertRaisesRegex(ValueError, "Given Home's ID must match one in the listings to delete.", self.home_manager.delete_home, 0)
+        
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.condo2)
+
+        # Must reject home that is not in the manager
+        self.assertRaisesRegex(ValueError, "Given Home's ID must match one in the listings to delete.", self.home_manager.delete_home, 3)
+
+        undefined_input = None
+        # Must reject undefined parameter
+        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.home_manager.delete_home, undefined_input)
+        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.home_manager.delete_home, self.detached_home2.get_id())
+
+        test_string = "Hello"
+        # Must reject invalid parameter
+        self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.home_manager.delete_home, test_string)
+        
 
         
         
