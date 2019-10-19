@@ -9,7 +9,7 @@ class Condo(AbstractHome):
 
     CONDO_TYPE = 'condo'
 
-    def __init__(self, home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, monthly_fee, pets):
+    def __init__(self, square_feet, year_built, rooms, bathrooms, city, seller, tax, monthly_fee, pets):
         """ Constructor for a Condo object """
         super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax)
 
