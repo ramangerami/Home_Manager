@@ -246,6 +246,29 @@ class TestCondo(unittest.TestCase):
         # Must reject invalid parameter
         self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.home_manager.delete_home, test_string)
         
+    def test_get_listing_stats_full(self):
+        """ 080A - Getting the stats of a populated manager """
+        self.home_manager.add_home(self.condo1)
+        self.home_manager.add_home(self.detached_home3)
+        self.home_manager.add_home(self.detached_home1)
+        self.home_manager.add_home(self.condo2)
+        self.home_manager.add_home(self.detached_home2)
+
+        stats = self.home_manager.get_listing_stats()
+
+        self.assertEqual(stats.get_total_num_homes(), 5)
+        self.assertEqual(stats.get_num_detached_homes(), len(self.home_manager.get_all_homes_by_type("detached home")))
+        self.assertEqual(stats.get_num_condos(), len(self.home_manager.get_all_homes_by_type("condo")))
+        self.assertEqual(stats.get_avg_years_old(), 13)
+
+    def test_get_listing_stats_empty(self):
+        """ 080B - Getting the stats of an empty manager """
+        stats = self.home_manager.get_listing_stats()
+
+        self.assertEqual(stats.get_total_num_homes(), 0)
+        self.assertEqual(stats.get_num_detached_homes(), 0)
+        self.assertEqual(stats.get_num_condos(), 0)
+        self.assertEqual(stats.get_avg_years_old(), 0)
 
         
         

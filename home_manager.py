@@ -82,7 +82,7 @@ class HomeManager:
                 condos += 1
         years = 0
         if len(years_list) > 0:
-            years = sum(years_list) / len(years_list)
+            years = int(sum(years_list) / len(years_list))
         stats = HomeStats(total_homes, detached_homes, condos, years)
         return stats
                 
