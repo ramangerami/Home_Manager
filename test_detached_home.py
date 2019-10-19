@@ -94,7 +94,7 @@ class TestDetachedHome(unittest.TestCase):
         self.detached_home.set_id(test_id1)
         self.assertEqual(self.detached_home.get_id(), test_id1)
         self.detached_home.set_id(test_id2)
-        self.assertEqual(self.detached_home.get_id(), test_id2)\
+        self.assertEqual(self.detached_home.get_id(), test_id2)
 
     def test_detached_home_set_id_set_valid(self):
         """ 030C - Setting an id with invalid parameters """

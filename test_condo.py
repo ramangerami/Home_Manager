@@ -94,7 +94,7 @@ class TestCondo(unittest.TestCase):
         self.condo.set_id(test_id1)
         self.assertEqual(self.condo.get_id(), test_id1)
         self.condo.set_id(test_id2)
-        self.assertEqual(self.condo.get_id(), test_id2)\
+        self.assertEqual(self.condo.get_id(), test_id2)
 
     def test_condo_set_id_set_valid(self):
         """ 030C - Setting an id with invalid parameters """
