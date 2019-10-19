@@ -10,8 +10,15 @@ class AbstractHome:
     SELLING_AGENT_LABEL = "Selling Agent Name"
     YEARLY_TAX_LABEL = "Yearly Property Tax"
 
-    def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax ):
+    def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax):
         """ Constructor for an Abstract Home Object """
+        AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
+        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, year_built)
+        AbstractHome._validate_int_input(AbstractHome.NUM_ROOMS_LABEL, rooms)
+        AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, bathrooms)
+        AbstractHome._validate_string_input(AbstractHome.CITY_LABEL, city)
+        AbstractHome._validate_string_input(AbstractHome.SELLING_AGENT_LABEL, seller)
+        AbstractHome._validate_float_input(AbstractHome.YEARLY_TAX_LABEL, tax)
 
         self._square_footage = square_feet
         self._year_built = year_built
