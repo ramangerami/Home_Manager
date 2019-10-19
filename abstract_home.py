@@ -10,6 +10,8 @@ class AbstractHome:
     SELLING_AGENT_LABEL = "Selling Agent Name"
     YEARLY_TAX_LABEL = "Yearly Property Tax"
 
+    CURRENT_YEAR = 2019
+
     def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax):
         """ Constructor for an Abstract Home Object """
         AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
@@ -36,6 +38,7 @@ class AbstractHome:
 
     def set_id(self, home_id):
         """ Sets the id of a home object """
+        AbstractHome._validate_int_input(AbstractHome.HOME_ID_LABEL, home_id)
         self._home_id = home_id
 
     def get_square_footage(self):
@@ -68,8 +71,8 @@ class AbstractHome:
 
     def get_years_old(self):
         """ Returns the age of a home object, assuming the current year is 2019 """
-        years_old = self.get_year_built() - 2019
-        return -years_old
+        years_old = self.get_year_built() - AbstractHome.CURRENT_YEAR
+        return years_old
 
     def get_description(self):
         """ Returns description of a home object with relevant details to a buyer/seller """
