@@ -1,3 +1,5 @@
+from home_stats import HomeStats
+
 class HomeManager:
     """ Manages Home Objects """
 
