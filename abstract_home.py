@@ -125,34 +125,4 @@ class AbstractHome:
             raise ValueError(display_name + " must be of type: Boolean.")
 
              
-    # kev - I commented your old validators and made new ones that give more detailed error messages
     
-    # @staticmethod
-    # def _validate_string(x):
-    #     """ Used to validate a string variable """
-    #     if x is None or type(x) != str:
-    #         raise ValueError("Must be a non-empty string")
-
-    # @staticmethod
-    # def _validate_float(x):
-    #     """ Used to validate a float variable """
-    #     if x is None or type(x) != float:
-    #         raise ValueError("Must be a non-empty float")
-
-    # @staticmethod
-    # def _validate_int(x):
-    #     """ Used to validate an int variable """
-    #     if x is None or type(x) != int:
-    #         raise ValueError("Must be a non-empty int")
-
-    # @staticmethod
-    # def _validate_boolean(x):
-    #     """ Used to validate a boolean variable """
-    #     if x is None or type(x) != bool:
-    #         raise ValueError("Must be a valid Boolean value")
-
-    # @staticmethod
-    # def _validate_home(x):
-    #     """ Used to validate Vehicle objects """
-    #     if x is None or type(x) != AbstractHome:
-    #         raise ValueError("Must be a Vehicle object")
