@@ -9,11 +9,16 @@ class HomeManager:
     HOME_OBJECT_LABEL = "Home object"
     HOME_ID_LABEL = "Home ID"
     HOME_TYPE_LABEL = "Type of Home"
+    FILE_PATH_LABEL = "File path"
 
+    # def __init__(self, filepath):
     def __init__(self):
         """ Constructor for a HomeManager Object """
         self._home_listings = []
         self._next_available_id = 0
+
+        # HomeManager._validate_string_input(HomeManager.FILE_PATH_LABEL, filepath)
+        # self._filepath = filepath
 
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """
@@ -50,12 +55,18 @@ class HomeManager:
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, replacement_home)
         if self.get_home_by_id(replacement_home.get_id()) is None:
             raise ValueError("Given Home's ID must match one in the listings to update.")
+        is_found = False
         for i in range(0, len(self._home_listings)):
             if self._home_listings[i].get_id() == replacement_home.get_id():
                 self._home_listings[i] = replacement_home
-                return self._home_listings[i]
+                # return self._home_listings[i]
+                is_found = True
+                break;
         # next((home for home in self._home_listings if home.get_id() == replacement_home.get_id()), ValueError("Home with same ID was not found"))
-        return None
+        # return None
+        if not is_found:
+            raise ValueError("Given Home's ID must match one in the listings to update.")
+
 
     def delete_home(self, home_id):
         """ Deletes a home from the manager, based on the id """
