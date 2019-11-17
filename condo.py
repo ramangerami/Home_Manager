@@ -38,4 +38,4 @@ class Condo(AbstractHome):
 
     def get_type(self):
         """ Returns the type of a Condo object """
-        return self.CONDO_TYPE
+        return Condo.CONDO_TYPE

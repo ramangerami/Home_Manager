@@ -38,4 +38,4 @@ class DetachedHome(AbstractHome):
 
     def get_type(self):
         """ Return type of a DetachedHome Object """
-        return self.DETACHED_HOME_TYPE
+        return DetachedHome.DETACHED_HOME_TYPE
