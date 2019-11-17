@@ -9,11 +9,16 @@ class HomeManager:
     HOME_OBJECT_LABEL = "Home object"
     HOME_ID_LABEL = "Home ID"
     HOME_TYPE_LABEL = "Type of Home"
+    FILE_PATH_LABEL = "File path"
 
+    # def __init__(self, filepath):
     def __init__(self):
         """ Constructor for a HomeManager Object """
         self._home_listings = []
         self._next_available_id = 0
+
+        # HomeManager._validate_string_input(HomeManager.FILE_PATH_LABEL, filepath)
+        # self._filepath = filepath
 
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """

@@ -39,3 +39,20 @@ class Condo(AbstractHome):
     def get_type(self):
         """ Returns the type of a Condo object """
         return Condo.CONDO_TYPE
+
+    def to_dict(self):
+        """ Get a Python Dictionary representation of the Condo """
+        condo_dict = dict()
+        condo_dict["home_id"] = int(self._home_id)
+        condo_dict["square_feet"] = int(self._square_footage)
+        condo_dict["year_built"] = int(self._year_built)
+        condo_dict["rooms"] = int(self._number_of_rooms)
+        condo_dict["bathrooms"] = int(self._number_of_bathrooms)
+        condo_dict["city"] = str(self._city)
+        condo_dict["seller"] = str(self._selling_agent)
+        condo_dict["tax"] = float(self._yearly_property_tax)
+        condo_dict["monthly_fee"] = int(self._monthly_strata_fee)
+        condo_dict["pets"] = bool(self._pets_allowed)
+        condo_dict["type"] = self.get_type()
+
+        return condo_dict

@@ -88,6 +88,10 @@ class AbstractHome:
         """ Returns the type of a home object """
         raise NotImplemented("Method must be implemented")
 
+    def to_dict(self):
+        """ Abstract method to return a Dictionary representation of the Home """
+        raise NotImplementedError("Subclass must implement abstract method")
+
     @classmethod
     def _validate_general_input(cls, display_name, val):
          """ Used to validate a variable for not being None """
