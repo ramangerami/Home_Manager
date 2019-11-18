@@ -1,12 +1,12 @@
 {	
-	"square_feet": 1085,
+	"square_feet": 1200,
 	"year_built": 2014,
-	"number_of_rooms": 2,
+	"number_of_rooms": 3,
 	"number_of_bathrooms": 2,
 	"city": "Vancouver",
-	"selling_agent": "Denzel Washington",
+	"selling_agent": "Denzel Curry",
 	"yearly_property_tax": 2002.00,
 	"monthly_strata_fee": 650,
-	"pets_allowed": false,
+	"pets_allowed": true,
 	"type": "condo"
 }
