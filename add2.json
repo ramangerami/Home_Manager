@@ -1,0 +1,12 @@
+{	
+	"square_feet": 3020,
+	"year_built": 1995,
+	"number_of_rooms": 6,
+	"number_of_bathrooms": 4,
+	"city": "Burnaby",
+	"selling_agent": "Johnny Cash",
+	"yearly_property_tax": 3418.00,
+	"number_of_floors": 2,
+	"has_rental_suite": true,
+	"type": "Detached Home"
+}
