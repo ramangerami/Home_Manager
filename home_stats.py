@@ -35,4 +35,13 @@ class HomeStats:
     def get_avg_years_old(self):
         """ Returns the average age of all the homes in the listing """
         return self._avg_years_old
-        
+    
+    def to_dict(self):
+        """ Get a Python Dictionary representation of the Home Stats """
+        stats_dict = dict()
+        stats_dict["total_homes"] = self._total_homes
+        stats_dict["detached_homes"] = self._detached_homes
+        stats_dict["condos"] = self._condos
+        stats_dict["years"] = self._years
+
+        return stats_dict
