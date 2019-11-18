@@ -39,9 +39,9 @@ class HomeStats:
     def to_dict(self):
         """ Get a Python Dictionary representation of the Home Stats """
         stats_dict = dict()
-        stats_dict["total_homes"] = self._total_homes
-        stats_dict["detached_homes"] = self._detached_homes
-        stats_dict["condos"] = self._condos
-        stats_dict["years"] = self._years
+        stats_dict["total_homes"] = self._total_num_homes
+        stats_dict["detached_homes"] = self._num_detached_homes
+        stats_dict["condos"] = self._num_condos
+        stats_dict["years"] = self._avg_years_old
 
         return stats_dict

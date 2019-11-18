@@ -65,12 +65,14 @@ def update_home(id):
             det = DetachedHome(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['number_of_floors'], content['has_rental_suite'])
+            det.set_id(id)
             example.update_home(det)
 
         elif content["type"] == "condo":
             con = Condo(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['pets_allowed'], content['monthly_strata_fee'])
+            con.set_id(id)
             example.update_home(con)
 
 
@@ -80,7 +82,10 @@ def update_home(id):
                 status=400
             )
             return response
-            
+        response = app.response_class(
+                status=200
+            )
+        return response   
     except ValueError as e:
         response = app.response_class(
             response=str(e),
@@ -165,7 +170,7 @@ def get_homes_by_type(type):
     except ValueError as e:
         response = app.response_class(
             response=str("Type is not valid"),
-            status=404
+            status=400
         )
         return response
 
