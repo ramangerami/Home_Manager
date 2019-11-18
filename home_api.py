@@ -7,11 +7,11 @@ import json
 app = Flask(__name__)
 
 filepath = ''
-example = HomeManager(filepath)
+example = HomeManager()
 
 # API Methods are below this line
 
-
+#works screens taken
 @app.route('/homemanager/homes', methods=['POST'])
 def add_home():
     """ Adds a home to the HomeManager """
@@ -50,8 +50,8 @@ def add_home():
         )
         return response
 
-
-@app.route('/homemanager/homes/<string:id>', methods=['DELETE'])
+#works screenshots taken
+@app.route('/homemanager/homes/<int:id>', methods=['DELETE'])
 def delete_home(id):
     """ Delete a home from the HomeManager """
 
