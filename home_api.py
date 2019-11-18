@@ -83,6 +83,25 @@ def get_all_homes():
     )
     return response
 
+@app.route('/homemanager/homes/all/<string:type>', methods=['GET'])
+def get_description(type):
+    """ Returns all homes of a certain type """
+    homes_by_type = example.get_all_homes_by_type(type)
+
+    try:
+        response = app.response_class(
+            status=200,
+            response=json.dumps(homes_by_type),
+            mimetype='applications/json'
+        )
+        return response
+
+    except ValueError as e:
+        response = app.response_class(
+            response=str("Type is not valid"),
+            status=404
+        )
+        return response
 
 if __name__ == "__main__":
     app.run()
