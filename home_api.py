@@ -98,7 +98,9 @@ def get_home(id):
 def get_all_homes():
     """ Returns all homes in an inventory manager """
     all_homes = example.get_all_homes()
-    dicted = all_homes.to_dict()
+    dicted = list()
+    for home in all_homes:
+        dicted.append(home.to_dict())
 
     response = app.response_class(
         status=200,
