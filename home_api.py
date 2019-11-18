@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-filepath = 'placeholder.txt'
+filepath = 'home_records.txt'
 example = HomeManager(filepath)
 
 # API Methods are below this line

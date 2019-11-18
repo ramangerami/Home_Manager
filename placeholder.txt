@@ -1,1 +1,0 @@
-[{"square_feet": 12000, "year_built": 2010, "number_of_rooms": 18, "number_of_bathrooms": 3, "city": "Richmond", "selling_agent": "Camefsssalia ", "yearly_property_tax": 0.25, "number_of_floors": 3, "has_rental_suite": true, "type": "detached home", "id": 0}]
