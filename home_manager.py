@@ -22,11 +22,16 @@ class HomeManager:
         HomeManager._validate_string_input(HomeManager.FILE_PATH_LABEL, filepath)
         self._filepath = filepath
 
+        self._read_homes_from_file()
+
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, home)
         home.set_id(self._next_available_id)
         self._home_listings.append(home)
+
+        self._write_homes_to_file()
+        
         self._next_available_id += 1
         return self._next_available_id - 1
 
@@ -62,6 +67,7 @@ class HomeManager:
             if self._home_listings[i].get_id() == replacement_home.get_id():
                 self._home_listings[i] = replacement_home
                 # return self._home_listings[i]
+                self._write_homes_to_file()
                 is_found = True
                 break;
         # next((home for home in self._home_listings if home.get_id() == replacement_home.get_id()), ValueError("Home with same ID was not found"))
@@ -78,6 +84,7 @@ class HomeManager:
         for home in self._home_listings:
             if home.get_id() == home_id:
                 self._home_listings.remove(home)
+                self._write_homes_to_file()
                 break
 
     def get_listing_stats(self):
@@ -123,7 +130,9 @@ class HomeManager:
             list_of_homes = list()
             for home in self._home_listings:
                 list_of_homes.append(home.to_dict())
-            json.dumps(list_of_homes, homes_file) 
+            json.dump(list_of_homes, homes_file) 
+
+            # print(list_of_homes)
                 
     @classmethod
     def _validate_general_input(cls, display_name, val):

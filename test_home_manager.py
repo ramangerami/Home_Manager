@@ -9,7 +9,7 @@ from home_manager import HomeManager
 class TestCondo(unittest.TestCase):
     """ Unit Tests for the Home Manager """
 
-    @patch('builtins.open', mock_open(read_data=''))
+    @patch('builtins.open', mock_open(read_data='{}'))
     def setUp(self):
         """ Creates a test fixture before each method is run """
         self.condo1 = Condo(6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
@@ -36,11 +36,22 @@ class TestCondo(unittest.TestCase):
         callingFunction= inspect.stack()[1][3]
         print('in %s - %s()' % (currentTest, callingFunction))
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_home_manager_constructor(self):
         """ 010A - Valid construction """
         self.assertIsNotNone(self.home_manager, "Home Manager must be defined.")
         self.assertIsInstance(self.home_manager, HomeManager, "Home Manager must be an instance of HomeManager.")
 
+    @patch('builtins.open', mock_open(read_data='{}'))
+    def test_home_manager_constructor_invalid(self):
+        """ 010B - Invalid filename construction """
+        undefined_input = None
+        self.assertRaisesRegex(ValueError, "File path cannot be undefined", HomeManager, undefined_input)
+
+        empty_input = ""
+        self.assertRaisesRegex(ValueError, "File path cannot be empty string", HomeManager, empty_input)
+
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_add_home_valid(self):
         """ 020A - Adding valid home objects """
         self.assertEqual(self.home_manager.get_all_homes(), [])
@@ -54,6 +65,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(self.home_manager.get_all_homes(), [self.condo1, self.detached_home1, self.condo2])
         self.assertEqual(self.home_manager.get_home_by_id(2), self.condo2)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_add_home_invalid(self):
         """ 020B - Adding invalid home objects """
         undefined_input = None
@@ -66,6 +78,7 @@ class TestCondo(unittest.TestCase):
         self.assertRaisesRegex(ValueError, "Home object must be a class that extends AbstractHome.", self.home_manager.add_home, test_string)
         self.assertIsNone(self.home_manager.get_home_by_id(0))
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_home_by_id_valid_is_in(self):
         """ 030A - Getting home that is in listing with a valid id """
         self.home_manager.add_home(self.condo1)
@@ -76,6 +89,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(self.home_manager.get_home_by_id(2), self.condo2)
         self.assertEqual(self.home_manager.get_home_by_id(1), self.detached_home1)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_home_by_id_valid_not_in(self):
         """ 030B - Getting home that is not in listing with a valid id """
         self.assertIsNone(self.home_manager.get_home_by_id(0))
@@ -86,6 +100,7 @@ class TestCondo(unittest.TestCase):
         self.assertIsNone(self.home_manager.get_home_by_id(-2))
         self.assertIsNone(self.home_manager.get_home_by_id(300))
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_home_by_id_invalid(self):
         """ 030C - Getting home with invalid id """
         self.home_manager.add_home(self.condo1)
@@ -100,6 +115,7 @@ class TestCondo(unittest.TestCase):
         # Must reject invalid parameter
         self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.home_manager.get_home_by_id, test_string)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_all_homes_full(self):
         """ 040A - Getting all homes of a populated home manager """
         self.home_manager.add_home(self.condo1)
@@ -111,12 +127,14 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(len(all_homes), 3)
 
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_all_homes_empty(self):
         """ 040B - Getting all homes of an empty home manager """
         all_homes = self.home_manager.get_all_homes()
         self.assertEqual(all_homes, [])
         self.assertEqual(len(all_homes), 0)
         
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_all_homes_by_type_full(self):
         """ 050B - Getting all homes of valid type of a populated home manager """
         self.home_manager.add_home(self.condo1)
@@ -132,6 +150,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(detacheds, [self.detached_home1, self.detached_home3, self.detached_home2])
         self.assertEqual(len(detacheds), 3)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_all_homes_by_type_empty(self):
         """ 050B - Getting all homes of valid type of an empty home manager """
         condos = self.home_manager.get_all_homes_by_type("condo")
@@ -143,6 +162,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(detacheds, [])
         self.assertEqual(len(detacheds), 0)
         
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_all_homes_by_type_invalid(self):
         """ 05BC - Getting all homes with invalid parameter """
         undefined_input = None
@@ -173,6 +193,7 @@ class TestCondo(unittest.TestCase):
         self.assertRaisesRegex(ValueError, "Type of Home cannot be empty string", self.home_manager.get_all_homes_by_type, empty_string)
     
         
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_update_home_valid(self):
         """ 060A - Updating a home in the list """
         self.home_manager.add_home(self.condo1)
@@ -187,6 +208,7 @@ class TestCondo(unittest.TestCase):
         self.home_manager.update_home(self.condo2)
         self.assertEqual(self.home_manager.get_home_by_id(id), self.condo2)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_update_home_invalid(self):
         """ 060B - Updating an invalid home in the list """
         self.detached_home3.set_id(0)
@@ -213,6 +235,7 @@ class TestCondo(unittest.TestCase):
         # Must reject invalid parameter
         self.assertRaisesRegex(ValueError, "Home object must be a class that extends AbstractHome.", self.home_manager.update_home, test_string)
         
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_delete_home_valid(self):
         """ 070A - Deleting a home in the list """
         self.home_manager.add_home(self.condo1)
@@ -227,6 +250,7 @@ class TestCondo(unittest.TestCase):
         self.home_manager.delete_home(1)
         self.assertEqual(len(all_homes), 2)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_delete_home_invalid(self):
         """ 070B - Deleting an invalid home in the list """
 
@@ -249,6 +273,7 @@ class TestCondo(unittest.TestCase):
         # Must reject invalid parameter
         self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.home_manager.delete_home, test_string)
         
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_listing_stats_full(self):
         """ 080A - Getting the stats of a populated manager """
         self.home_manager.add_home(self.condo1)
@@ -264,6 +289,7 @@ class TestCondo(unittest.TestCase):
         self.assertEqual(stats.get_num_condos(), len(self.home_manager.get_all_homes_by_type("condo")))
         self.assertEqual(stats.get_avg_years_old(), 13)
 
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_get_listing_stats_empty(self):
         """ 080B - Getting the stats of an empty manager """
         stats = self.home_manager.get_listing_stats()
