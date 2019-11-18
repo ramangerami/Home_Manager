@@ -56,7 +56,7 @@ def delete_home(id):
     """ Delete a home from the HomeManager """
 
     try:
-        home = example.delete_home(id)
+        example.delete_home(id)
 
         response = app.response_class(
             status=200
@@ -84,7 +84,7 @@ def get_all_homes():
     return response
 
 @app.route('/homemanager/homes/all/<string:type>', methods=['GET'])
-def get_description(type):
+def get_homes_by_type(type):
     """ Returns all homes of a certain type """
     homes_by_type = example.get_all_homes_by_type(type)
 
@@ -93,13 +93,24 @@ def get_description(type):
             status=200,
             response=json.dumps(homes_by_type),
             mimetype='applications/json'
-        )
+        )   
         return response
 
     except ValueError as e:
         response = app.response_class(
             response=str("Type is not valid"),
             status=404
+        )
+        return response
+
+    @app.route('/homemanager/homes/stats', methods=['GET'])
+    def get_home_stats():
+        """ Gets the Listing Stats for the HomeManager """
+        listing_stats = example.get_listing_stats()
+        response = app.response_class(
+            status=200,
+            response=json.dumps(listing_stats.to_dict()),
+            mimetype='application/json'
         )
         return response
 
