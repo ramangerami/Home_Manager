@@ -43,6 +43,15 @@ class TestCondo(unittest.TestCase):
         self.assertIsInstance(self.home_manager, HomeManager, "Home Manager must be an instance of HomeManager.")
 
     @patch('builtins.open', mock_open(read_data='{}'))
+    def test_home_manager_constructor_invalid(self):
+        """ 010B - Invalid filename construction """
+        undefined_input = None
+        self.assertRaisesRegex(ValueError, "File path cannot be undefined", HomeManager, undefined_input)
+
+        empty_input = ""
+        self.assertRaisesRegex(ValueError, "File path cannot be empty string", HomeManager, empty_input)
+
+    @patch('builtins.open', mock_open(read_data='{}'))
     def test_add_home_valid(self):
         """ 020A - Adding valid home objects """
         self.assertEqual(self.home_manager.get_all_homes(), [])
