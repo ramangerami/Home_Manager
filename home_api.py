@@ -6,8 +6,8 @@ import json
 
 app = Flask(__name__)
 
-filepath = ''
-example = HomeManager()
+filepath = 'placeholder.txt'
+example = HomeManager(filepath)
 
 # API Methods are below this line
 
@@ -121,7 +121,7 @@ def get_home(id):
             )
         else:
             response = app.response_class(
-            response="Home with given ID does not exist."
+            response="Home with given ID does not exist.",
             status=404
             )
         return response    
