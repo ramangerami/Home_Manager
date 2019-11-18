@@ -51,6 +51,8 @@ class HomeManager:
     def get_all_homes_by_type(self, home_type):
         """ Returns a list of homes by specific type """
         HomeManager._validate_string_input(HomeManager.HOME_TYPE_LABEL, home_type)
+        if home_type not in ["condo", "detached home"]:
+            raise ValueError("Home Type is invalid")
         results = []
         for home in self._home_listings:
             if home.get_type() == home_type:

@@ -155,11 +155,11 @@ def get_all_homes():
 @app.route('/homemanager/homes/all/<string:type>', methods=['GET'])
 def get_homes_by_type(type):
     """ Returns all homes of a certain type """
-    homes_by_type = example.get_all_homes_by_type(type)
-    dicted = list()
-    for home in homes_by_type:
-        dicted.append(home.to_dict())
     try:
+        homes_by_type = example.get_all_homes_by_type(type)
+        dicted = list()
+        for home in homes_by_type:
+            dicted.append(home.to_dict())
         response = app.response_class(
             status=200,
             response=json.dumps(dicted),
