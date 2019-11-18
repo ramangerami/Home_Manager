@@ -112,14 +112,14 @@ class HomeManager:
             list_of_homes = json.load(homes_file)
             for home in list_of_homes:
                 if home["type"] == Condo.CONDO_TYPE:
-                    condo = Condo(home["square_feet"], home["year_built"], home["rooms"], \
-                            home["bathrooms"], home["city"], home["seller"], home["tax"], \
-                            home["monthly_fee"], home["pets"])
+                    condo = Condo(home["square_feet"], home["year_built"], home["number_of_rooms"], \
+                            home["number_of_bathrooms"], home["city"], home["selling_agent"], home["yearly_property_tax"], \
+                            home["monthly_strata_fee"], home["pets_allowed"])
                     self.add_home(condo)
                 elif home["type"] == DetachedHome.DETACHED_HOME_TYPE:
-                    detached_home = DetachedHome(home["square_feet"], home["year_built"], home["rooms"], \
-                            home["bathrooms"], home["city"], home["seller"], home["tax"], \
-                            home["floors"], home["has_suite"])
+                    detached_home = DetachedHome(home["square_feet"], home["year_built"], home["number_of_rooms"], \
+                            home["number_of_bathrooms"], home["city"], home["selling_agent"], home["yearly_property_tax"], \
+                            home["number_of_floors"], home["has_rental_suite"])
                     self.add_home(detached_home)
                 else:
                     raise ValueError("Home type not recognized")

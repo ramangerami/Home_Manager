@@ -1,1 +1,1 @@
-{}
+[{"square_feet": 12000, "year_built": 2010, "number_of_rooms": 18, "number_of_bathrooms": 3, "city": "Richmond", "selling_agent": "Camelia Stewart", "yearly_property_tax": 0.25, "number_of_floors": 3, "has_rental_suite": true, "type": "detached home", "id": 0}, {"square_feet": 6000, "year_built": 1999, "number_of_rooms": 4, "number_of_bathrooms": 2, "city": "Vancouver", "selling_agent": "Adrian Gekko", "yearly_property_tax": 12.5, "monthly_strata_fee": 800, "pets_allowed": false, "type": "condo", "id": 1}]

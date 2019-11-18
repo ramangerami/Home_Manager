@@ -151,11 +151,13 @@ def get_all_homes():
 def get_homes_by_type(type):
     """ Returns all homes of a certain type """
     homes_by_type = example.get_all_homes_by_type(type)
-
+    dicted = list()
+    for home in homes_by_type:
+        dicted.append(home.to_dict())
     try:
         response = app.response_class(
             status=200,
-            response=json.dumps(homes_by_type),
+            response=json.dumps(dicted),
             mimetype='applications/json'
         )   
         return response

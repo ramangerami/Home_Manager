@@ -53,5 +53,7 @@ class Condo(AbstractHome):
         condo_dict["monthly_strata_fee"] = int(self._monthly_strata_fee)
         condo_dict["pets_allowed"] = bool(self._pets_allowed)
         condo_dict["type"] = self.get_type()
+        if self.get_id() is not None:
+            condo_dict["id"] = self.get_id()
 
         return condo_dict
