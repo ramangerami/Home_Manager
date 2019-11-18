@@ -6,7 +6,8 @@ import json
 
 app = Flask(__name__)
 
-example = HomeManager()
+filepath = ''
+example = HomeManager(filepath)
 
 # API Methods are below this line
 
@@ -69,7 +70,18 @@ def delete_home(id):
         )
         return response
 
+@app.route('/homemanager/homes/all', methods=['GET'])
+def get_all_homes():
+    """ Returns all homes in an inventory manager """
+    all_homes = example.get_all_homes()
+    dicted = all_homes.to_dict()
 
+    response = app.response_class(
+        status=200,
+        response=json.dumps(dicted),
+        mimetype='applications/json'
+    )
+    return response
 
 
 if __name__ == "__main__":
