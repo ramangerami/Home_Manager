@@ -43,7 +43,6 @@ class Condo(AbstractHome):
     def to_dict(self):
         """ Get a Python Dictionary representation of the Condo """
         condo_dict = dict()
-        condo_dict["home_id"] = int(self._home_id)
         condo_dict["square_feet"] = int(self._square_footage)
         condo_dict["year_built"] = int(self._year_built)
         condo_dict["rooms"] = int(self._number_of_rooms)

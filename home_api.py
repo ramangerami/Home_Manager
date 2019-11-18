@@ -56,7 +56,7 @@ def delete_home(id):
     """ Delete a home from the HomeManager """
 
     try:
-        home = example.delete_home(id)
+        example.delete_home(id)
 
         response = app.response_class(
             status=200
@@ -70,11 +70,37 @@ def delete_home(id):
         )
         return response
 
+@app.route('/homemanager/homes/<int:id>', methods=['GET'])
+def get_home(id):
+    """ Get a single existing Home based on ID """
+    try:
+        home = example.get_home_by_id(id)
+        if home is not None:
+            response = app.response_class(
+            status=200,
+            response=json.dumps(home.to_dict()),
+            mimetype='application/json'
+            )
+        else:
+            response = app.response_class(
+            response="Home with given ID does not exist."
+            status=404
+            )
+        return response    
+    except ValueError as e:
+        response = app.response_class(
+        response=str(e),
+        status=400
+        )
+        return response
+
 @app.route('/homemanager/homes/all', methods=['GET'])
 def get_all_homes():
     """ Returns all homes in an inventory manager """
     all_homes = example.get_all_homes()
-    dicted = all_homes.to_dict()
+    dicted = list()
+    for home in all_homes:
+        dicted.append(home.to_dict())
 
     response = app.response_class(
         status=200,
@@ -84,7 +110,7 @@ def get_all_homes():
     return response
 
 @app.route('/homemanager/homes/all/<string:type>', methods=['GET'])
-def get_description(type):
+def get_homes_by_type(type):
     """ Returns all homes of a certain type """
     homes_by_type = example.get_all_homes_by_type(type)
 
@@ -93,13 +119,24 @@ def get_description(type):
             status=200,
             response=json.dumps(homes_by_type),
             mimetype='applications/json'
-        )
+        )   
         return response
 
     except ValueError as e:
         response = app.response_class(
             response=str("Type is not valid"),
             status=404
+        )
+        return response
+
+    @app.route('/homemanager/homes/stats', methods=['GET'])
+    def get_home_stats():
+        """ Gets the Listing Stats for the HomeManager """
+        listing_stats = example.get_listing_stats()
+        response = app.response_class(
+            status=200,
+            response=json.dumps(listing_stats.to_dict()),
+            mimetype='application/json'
         )
         return response
 

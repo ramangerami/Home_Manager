@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch, mock_open
 import inspect
 from abstract_home import AbstractHome
 from detached_home import DetachedHome
@@ -8,6 +9,7 @@ from home_manager import HomeManager
 class TestCondo(unittest.TestCase):
     """ Unit Tests for the Home Manager """
 
+    @patch('builtins.open', mock_open(read_data=''))
     def setUp(self):
         """ Creates a test fixture before each method is run """
         self.condo1 = Condo(6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
@@ -18,7 +20,8 @@ class TestCondo(unittest.TestCase):
         self.detached_home2 = DetachedHome(800, 1990, 18, 1, "West Vancouver", "Spaghetti Alfredo", 5.0, 6, False)
         self.detached_home3 = DetachedHome(9500, 2019, 2, 0, "Coquitlam", "John Smiff", 1.3, 10, True)
 
-        self.home_manager = HomeManager()
+        self.filename = "home_records.txt"
+        self.home_manager = HomeManager(self.filename)
         self.assertIsNotNone(self.home_manager, "Home Manager must be defined.")
 
         self.logPoint()

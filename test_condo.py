@@ -166,5 +166,21 @@ class TestCondo(unittest.TestCase):
                         "This home is being sold by Adrian Gekko"
         self.assertEqual(self.condo.get_description(), description)
 
+    def test_to_dict(self):
+        """ 160A - Getting the Python Dictionary representation """
+        condo_dict = {
+            "type": "condo",
+            "square_feet": 6000,
+            "year_built": 1999,
+            "rooms": 4,
+            "bathrooms": 2,
+            "city": "Vancouver",
+            "seller": "Adrian Gekko",
+            "tax": 12.5,
+            "monthly_fee": 800,
+            "pets": False,
+            }
+        self.assertEqual(self.condo.to_dict(), condo_dict)
+
 if __name__ == "__main__":
     unittest.main()

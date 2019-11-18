@@ -3,6 +3,8 @@ from abstract_home import AbstractHome
 from detached_home import DetachedHome
 from condo import Condo
 
+import json
+
 class HomeManager:
     """ Manages Home Objects """
 
@@ -11,14 +13,14 @@ class HomeManager:
     HOME_TYPE_LABEL = "Type of Home"
     FILE_PATH_LABEL = "File path"
 
-    # def __init__(self, filepath):
-    def __init__(self):
+    def __init__(self, filepath):
+    # def __init__(self):
         """ Constructor for a HomeManager Object """
         self._home_listings = []
         self._next_available_id = 0
 
-        # HomeManager._validate_string_input(HomeManager.FILE_PATH_LABEL, filepath)
-        # self._filepath = filepath
+        HomeManager._validate_string_input(HomeManager.FILE_PATH_LABEL, filepath)
+        self._filepath = filepath
 
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """
@@ -97,13 +99,38 @@ class HomeManager:
         stats = HomeStats(total_homes, detached_homes, condos, years)
         return stats
                 
+    def _read_homes_from_file(self):
+        """ Loads JSON Home record data from a file """
+        with open(self._filepath, "r") as homes_file:
+            list_of_homes = json.load(homes_file)
+            for home in list_of_homes:
+                if home["type"] == Condo.CONDO_TYPE:
+                    condo = Condo(home["square_feet"], home["year_built"], home["rooms"], \
+                            home["bathrooms"], home["city"], home["seller"], home["tax"], \
+                            home["monthly_fee"], home["pets"])
+                    self.add_home(condo)
+                elif home["type"] == DetachedHome.DETACHED_HOME_TYPE:
+                    detached_home = DetachedHome(home["square_feet"], home["year_built"], home["rooms"], \
+                            home["bathrooms"], home["city"], home["seller"], home["tax"], \
+                            home["floors"], home["has_suite"])
+                    self.add_home(detached_home)
+                else:
+                    raise ValueError("Home type not recognized")
+                
+    def _write_homes_to_file(self):
+        """ Overwrites JSON Home record data to a file """
+        with open(self._filepath, 'w') as homes_file:
+            list_of_homes = list()
+            for home in self._home_listings:
+                list_of_homes.append(home.to_dict())
+            json.dumps(list_of_homes, homes_file) 
                 
     @classmethod
     def _validate_general_input(cls, display_name, val):
-         """ Used to validate a variable for not being None """
-         if val is None:
-             raise ValueError(display_name + " cannot be undefined.")
-             
+        """ Used to validate a variable for not being None """
+        if val is None:
+            raise ValueError(display_name + " cannot be undefined.")
+
     @classmethod
     def _validate_string_input(cls, display_name, str_val):
         """ Used to validate a string variable """

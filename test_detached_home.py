@@ -166,5 +166,21 @@ class TestDetachedHome(unittest.TestCase):
                         "This home is being sold by Camelia Stewart"
         self.assertEqual(self.detached_home.get_description(), description)
 
+    def test_to_dict(self):
+        """ 160A - Getting the Python Dictionary representation """
+        detached_home_dict = {
+            "type": "detached home",
+            "square_feet": 12000,
+            "year_built": 2010,
+            "rooms": 18,
+            "bathrooms": 3,
+            "city": "Richmond",
+            "seller": "Camelia Stewart",
+            "tax": 0.25,
+            "floors": 3,
+            "has_suite": True,
+            }
+        self.assertEqual(self.detached_home.to_dict(), detached_home_dict)
+
 if __name__ == "__main__":
     unittest.main()
