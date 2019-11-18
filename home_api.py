@@ -18,13 +18,13 @@ def add_home():
     content = request.json
 
     try:
-        if content["type"] == "Detached Home":
+        if content["type"] == "detached home":
             det = DetachedHome(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['number_of_floors'], content['has_rental_suite'])
             example.add_home(det)
 
-        elif content["type"] == "Condo":
+        elif content["type"] == "condo":
             con = Condo(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['monthly_strata_fee'], content['pets_allowed'])
@@ -61,13 +61,13 @@ def update_home(id):
         )
         return response
     try:
-        if content["type"] == "Detached Home":
+        if content["type"] == "detached home":
             det = DetachedHome(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['number_of_floors'], content['has_rental_suite'])
             example.update_home(det)
 
-        elif content["type"] == "Condo":
+        elif content["type"] == "condo":
             con = Condo(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['pets_allowed'], content['monthly_strata_fee'])
@@ -167,16 +167,16 @@ def get_homes_by_type(type):
         )
         return response
 
-    @app.route('/homemanager/homes/stats', methods=['GET'])
-    def get_home_stats():
-        """ Gets the Listing Stats for the HomeManager """
-        listing_stats = example.get_listing_stats()
-        response = app.response_class(
-            status=200,
-            response=json.dumps(listing_stats.to_dict()),
-            mimetype='application/json'
-        )
-        return response
+@app.route('/homemanager/homes/stats', methods=['GET'])
+def get_home_stats():
+    """ Gets the Listing Stats for the HomeManager """
+    listing_stats = example.get_listing_stats()
+    response = app.response_class(
+        status=200,
+        response=json.dumps(listing_stats.to_dict()),
+        mimetype='application/json'
+    )
+    return response
 
 if __name__ == "__main__":
     app.run()
