@@ -27,7 +27,7 @@ def add_home():
         elif content["type"] == "Condo":
             con = Condo(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
-                        content['pets_allowed'], content['monthly_strata_fee'])
+                        content['monthly_strata_fee'], content['pets_allowed'])
             example.add_home(con)
 
 
