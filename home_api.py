@@ -70,6 +70,30 @@ def delete_home(id):
         )
         return response
 
+@app.route('/homemanager/homes/<int:id>', methods=['GET'])
+def get_home(id):
+    """ Get a single existing Home based on ID """
+    try:
+        home = example.get_home_by_id(id)
+        if home is not None:
+            response = app.response_class(
+            status=200,
+            response=json.dumps(home.to_dict()),
+            mimetype='application/json'
+            )
+        else:
+            response = app.response_class(
+            response="Home with given ID does not exist."
+            status=404
+            )
+        return response    
+    except ValueError as e:
+        response = app.response_class(
+        response=str(e),
+        status=400
+        )
+        return response
+
 @app.route('/homemanager/homes/all', methods=['GET'])
 def get_all_homes():
     """ Returns all homes in an inventory manager """
