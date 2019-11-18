@@ -172,13 +172,13 @@ class TestCondo(unittest.TestCase):
             "type": "condo",
             "square_feet": 6000,
             "year_built": 1999,
-            "rooms": 4,
-            "bathrooms": 2,
+            "number_of_rooms": 4,
+            "number_of_bathrooms": 2,
             "city": "Vancouver",
-            "seller": "Adrian Gekko",
-            "tax": 12.5,
-            "monthly_fee": 800,
-            "pets": False,
+            "selling_agent": "Adrian Gekko",
+            "yearly_property_tax": 12.5,
+            "monthly_strata_fee": 800,
+            "pets_allowed": False,
             }
         self.assertEqual(self.condo.to_dict(), condo_dict)
 

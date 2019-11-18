@@ -172,13 +172,13 @@ class TestDetachedHome(unittest.TestCase):
             "type": "detached home",
             "square_feet": 12000,
             "year_built": 2010,
-            "rooms": 18,
-            "bathrooms": 3,
+            "number_of_rooms": 18,
+            "number_of_bathrooms": 3,
             "city": "Richmond",
-            "seller": "Camelia Stewart",
-            "tax": 0.25,
-            "floors": 3,
-            "has_suite": True,
+            "selling_agent": "Camelia Stewart",
+            "yearly_property_tax": 0.25,
+            "number_of_floors": 3,
+            "has_rental_suite": True,
             }
         self.assertEqual(self.detached_home.to_dict(), detached_home_dict)
 
