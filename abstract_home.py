@@ -1,4 +1,7 @@
-class AbstractHome:
+from sqlalchemy import Column, String, Integer, Float, DateTime
+from base import Base
+
+class AbstractHome(Base):
     """ Representation of a home object, with relevant details to buyers/sellers """
     
     HOME_ID_LABEL = "Home ID"

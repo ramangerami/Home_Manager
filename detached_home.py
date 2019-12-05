@@ -1,4 +1,5 @@
 from abstract_home import AbstractHome
+from sqlalchemy import Column, String, Integer, Float, DateTime
 
 
 class DetachedHome(AbstractHome):
