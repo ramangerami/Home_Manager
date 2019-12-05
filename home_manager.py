@@ -107,8 +107,23 @@ class HomeManager:
         """ Takes a home object and replaces an existing home object with the same id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, replacement_home)
         # if self.get_home_by_id(replacement_home.get_id()) is None:
+        #TODO
         if self.get_home_by_id(replacement_home.id) is None:
             raise ValueError("Given Home's ID must match one in the listings to update.")
+        session = self._db_session()
+
+        home = session.query(Car).filter(Car.vin == vin).first()
+        if home is None:
+            home = session.query(Truck).filter(Truck.vin == vin).first()
+
+        if home is None:
+            session.close()
+            raise ValueError("Could not find vehicle by VIN")
+
+        vehicle.sell_vehicle(sold_price)
+        session.commit()
+
+        session.close()
         is_found = False
         for i in range(0, len(self._home_listings)):
             # if self._home_listings[i].get_id() == replacement_home.get_id():
