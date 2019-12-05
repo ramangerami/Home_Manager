@@ -1,10 +1,13 @@
 import unittest
-from unittest.mock import patch, mock_open
+# from unittest.mock import patch, mock_open
 import inspect
 from abstract_home import AbstractHome
 from detached_home import DetachedHome
 from condo import Condo
 from home_manager import HomeManager
+
+from sqlalchemy import create_engine
+from base import Base
 
 class TestCondo(unittest.TestCase):
     """ Unit Tests for the Home Manager """
