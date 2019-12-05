@@ -41,9 +41,15 @@ class HomeManager:
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, home)
         # home.set_id(self._next_available_id)
         home.id = self._next_available_id
-        self._home_listings.append(home)
+        # self._home_listings.append(home)
 
         # self._write_homes_to_file()
+        session = self._db_session()
+
+        session.add(home)
+        session.commit()
+
+        session.close()
         
         self._next_available_id += 1
         return self._next_available_id - 1
@@ -51,16 +57,31 @@ class HomeManager:
     def get_home_by_id(self, id_number):
         """ Returns a home in the listings based on id, returns none if it doesn't exist in the listings """
         HomeManager._validate_int_input(HomeManager.HOME_ID_LABEL, id_number)
-        for home in self._home_listings:
-            # if home.get_id() == id_number:
-            if home.id == id_number:
-                return home
+        # for home in self._home_listings:
+        #     # if home.get_id() == id_number:
+        #     if home.id == id_number:
+        #         return home
         # return next((home for home in self._home_listings if home.get_id() == id_number), None)
-        return None
+        session = self._db_session()
+
+        home = session.query(Condo).filter(Condo.id == id_number).first()
+
+        if home is None:
+            home = session.query(DetachedHome).filter(DetachedHome.id == id_number).first()
+
+        session.close() 
+
+        # return None
+        return home
 
     def get_all_homes(self):
         """ Returns list of all homes """
-        return self._home_listings
+        # return self._home_listings
+        homes_listings = []
+        homes_listings.append(self.get_all_homes_by_type("condo"))        
+        homes_listings.append(self.get_all_homes_by_type("detached home"))        
+        return homes_listings
+
 
     def get_all_homes_by_type(self, home_type):
         """ Returns a list of homes by specific type """
@@ -68,9 +89,18 @@ class HomeManager:
         if home_type not in ["condo", "detached home"]:
             raise ValueError("Home Type is invalid")
         results = []
-        for home in self._home_listings:
-            if home.get_type() == home_type:
-                results.append(home)
+        # for home in self._home_listings:
+        #     if home.get_type() == home_type:
+        #         results.append(home)
+        # do i need to filter by type?
+        if home_type == Condo.CONDO_TYPE:
+            results = session.query(Condo).all()
+        elif home_type == DetachedHome.DETACHED_HOME_TYPE:
+            results = session.query(DetachedHome).all()
+        # else:
+        #     results = []
+
+        session.close()
         return results
 
     def update_home(self, replacement_home):

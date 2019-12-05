@@ -16,9 +16,9 @@ class TestCondo(unittest.TestCase):
     # @patch('builtins.open', mock_open(read_data='{}'))
     def setUp(self):
         """ Creates a test database before each method is run """
-        self.db.filename = "test_homes"
-        self.db.filename += ".sqlite"
-        engine = create_engine("sqlite:///"+self.db.filename)
+        self.db_filename = "test_homes"
+        self.db_filename += ".sqlite"
+        engine = create_engine("sqlite:///"+self.db_filename)
 
         # Creates all the tables
         Base.metadata.create_all(engine)
@@ -33,14 +33,14 @@ class TestCondo(unittest.TestCase):
         self.detached_home3 = DetachedHome(9500, 2019, 2, 0, "Coquitlam", "John Smiff", 1.3, 10, True)
 
         # self.filename = "home_records.txt"
-        self.home_manager = HomeManager(self.db.filename)
+        self.home_manager = HomeManager(self.db_filename)
         self.assertIsNotNone(self.home_manager, "Home Manager must be defined.")
 
         self.logPoint()
     
     def tearDown(self):
         """ Resets the variables and deletes test database after each method is run """
-        os.remove(self.db.filename)
+        os.remove(self.db_filename)
         self.logPoint()
 
 
@@ -216,9 +216,10 @@ class TestCondo(unittest.TestCase):
         self.home_manager.add_home(self.condo2)
         self.home_manager.add_home(self.detached_home2)
 
-        id = self.condo1.get_id()
+        id = self.condo1.id
         self.assertEqual(self.home_manager.get_home_by_id(id), self.condo1)
-        self.condo2.set_id(id)
+        # self.condo2.set_id(id)
+        self.condo2.id = id
         self.home_manager.update_home(self.condo2)
         self.assertEqual(self.home_manager.get_home_by_id(id), self.condo2)
 
@@ -226,7 +227,7 @@ class TestCondo(unittest.TestCase):
     def test_update_home_invalid(self):
         """ 060B - Updating an invalid home in the list """
         self.detached_home3.set_id(0)
-        self.assertEqual(self.detached_home3.get_id(), 0)
+        self.assertEqual(self.detached_home3.id, 0)
 
         # Must reject home that is not in the manager
         self.assertRaisesRegex(ValueError, "Given Home's ID must match one in the listings to update.", self.home_manager.update_home, self.detached_home3)
@@ -236,7 +237,7 @@ class TestCondo(unittest.TestCase):
         self.home_manager.add_home(self.condo2)
 
         self.condo3.set_id(5)
-        self.assertEqual(self.condo3.get_id(), 5)
+        self.assertEqual(self.condo3.id, 5)
         # Must reject home that is not in the manager
         self.assertRaisesRegex(ValueError, "Given Home's ID must match one in the listings to update.", self.home_manager.update_home, self.condo3)
 
@@ -281,7 +282,7 @@ class TestCondo(unittest.TestCase):
         undefined_input = None
         # Must reject undefined parameter
         self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.home_manager.delete_home, undefined_input)
-        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.home_manager.delete_home, self.detached_home2.get_id())
+        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.home_manager.delete_home, self.detached_home2.id)
 
         test_string = "Hello"
         # Must reject invalid parameter
