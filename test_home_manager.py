@@ -16,7 +16,7 @@ class TestCondo(unittest.TestCase):
     # @patch('builtins.open', mock_open(read_data='{}'))
     def setUp(self):
         """ Creates a test database before each method is run """
-        self.db.filename = "test_vehicles"
+        self.db.filename = "test_homes"
         self.db.filename += ".sqlite"
         engine = create_engine("sqlite:///"+self.db.filename)
 
