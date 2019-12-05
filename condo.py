@@ -56,9 +56,11 @@ class Condo(AbstractHome):
         condo_dict["selling_agent"] = str(self.selling_agent)
         condo_dict["yearly_property_tax"] = float(self.yearly_property_tax)
         condo_dict["monthly_strata_fee"] = int(self.monthly_strata_fee)
-        condo_dict["pets_allowed"] = bool(self.pets_allowed)
+        # condo_dict["pets_allowed"] = bool(self.pets_allowed)
+        condo_dict["pets_allowed"] = int(self.pets_allowed)
         condo_dict["type"] = self.get_type()
-        if self.get_id() is not None:
-            condo_dict["id"] = self.get_id()
+        detached_home_dict["id"] = int(self.id)
+        # if self.get_id() is not None:
+            # condo_dict["id"] = self.get_id()
 
         return condo_dict
