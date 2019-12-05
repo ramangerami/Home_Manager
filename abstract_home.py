@@ -15,6 +15,33 @@ class AbstractHome(Base):
 
     CURRENT_YEAR = 2019
 
+    # __tablename__ = "vehicles"
+    __tablename__ = "homes"
+
+    home_id             = Column(XXX)
+    square_footage      = Column(Integer)
+    year_built          = Column(Integer)
+    number_of_rooms     = Column(Integer)
+    number_of_bathrooms = Column(Integer)
+    city                = Column(XXX)
+    selling_agent       = Column(XXX)
+    yearly_property_tax = Column(Float)
+
+    # type = Column(XXX)
+
+    # id = Column(Integer, primary_key=True)
+    # vin = Column(String(100))
+    # make = Column(String(100))
+    # model = Column(String(100))
+    # year = Column(Integer)
+    # color = Column(String(100))
+    # mileage = Column(Integer)
+    # list_price = Column(Float)
+    # cost = Column(Float)
+    # is_sold = Column(Integer)
+    # sold_price = Column(Float)
+    # type = Column(String(5))
+
     def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax):
         """ Constructor for an Abstract Home Object """
 
