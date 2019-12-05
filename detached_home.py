@@ -19,13 +19,13 @@ class DetachedHome(AbstractHome):
         AbstractHome._validate_bool_input(DetachedHome.HAS_SUITE_LABEL, has_suite)
         self.has_rental_suite = has_suite
 
-    def get_number_of_floors(self):
-        """ Returns the number of floors for a DetachedHome object """
-        return self._number_of_floors
+    # def get_number_of_floors(self):
+    #     """ Returns the number of floors for a DetachedHome object """
+    #     return self._number_of_floors
 
-    def get_has_rental_suite(self):
-        """ Returns boolean for if a home has a rental suite """
-        return self._has_rental_suite
+    # def get_has_rental_suite(self):
+    #     """ Returns boolean for if a home has a rental suite """
+    #     return self._has_rental_suite
 
     def get_description(self):
         """ Returns a description of a DetachedHome object with details relevant to buyers and seller """
@@ -53,7 +53,8 @@ class DetachedHome(AbstractHome):
         detached_home_dict["number_of_floors"] = int(self._number_of_floors)
         detached_home_dict["has_rental_suite"] = bool(self._has_rental_suite)
         detached_home_dict["type"] = self.get_type()
-        if self.get_id() is not None:
-            detached_home_dict["id"] = self.get_id()
+        detached_home_dict["id"] = int(self.id)
+        # if self.get_id() is not None:
+            # detached_home_dict["id"] = self.get_id()
             
         return detached_home_dict

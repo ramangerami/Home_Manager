@@ -98,9 +98,9 @@ class AbstractHome:
 
     @classmethod
     def _validate_general_input(cls, display_name, val):
-         """ Used to validate a variable for not being None """
-         if val is None:
-             raise ValueError(display_name + " cannot be undefined.")
+        """ Used to validate a variable for not being None """
+        if val is None:
+            raise ValueError(display_name + " cannot be undefined.")
 
     @classmethod
     def _validate_string_input(cls, display_name, str_val):
@@ -110,27 +110,24 @@ class AbstractHome:
             raise ValueError(display_name + " must be of type: String.")
         if str_val == "":
             raise ValueError(display_name + " cannot be empty string.")
-             
+
     @classmethod
     def _validate_float_input(cls, display_name, flt_val):
         """ Used to validate a float variable """
         cls._validate_general_input(display_name, flt_val)
         if type(flt_val) is not float:
             raise ValueError(display_name + " must be of type: Float.")
-             
+
     @classmethod
     def _validate_int_input(cls, display_name, int_val):
         """ Used to validate a integer variable """
         cls._validate_general_input(display_name, int_val)
         if type(int_val) is not int:
             raise ValueError(display_name + " must be of type: Integer.")
-             
+
     @classmethod
     def _validate_bool_input(cls, display_name, bool_val):
         """ Used to validate a boolean variable """
         cls._validate_general_input(display_name, bool_val)
         if type(bool_val) is not bool:
             raise ValueError(display_name + " must be of type: Boolean.")
-
-             
-    
