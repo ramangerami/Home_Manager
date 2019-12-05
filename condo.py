@@ -16,7 +16,7 @@ class Condo(AbstractHome):
 
     def __init__(self, square_feet, year_built, rooms, bathrooms, city, seller, tax, monthly_fee, pets):
         """ Constructor for a Condo object """
-        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax)
+        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax, Condo.CONDO_TYPE)
 
         AbstractHome._validate_int_input(Condo.MONTHLY_FEE_LABEL, monthly_fee)
         self.monthly_strata_fee = monthly_fee
@@ -58,7 +58,7 @@ class Condo(AbstractHome):
         condo_dict["monthly_strata_fee"] = int(self.monthly_strata_fee)
         # condo_dict["pets_allowed"] = bool(self.pets_allowed)
         condo_dict["pets_allowed"] = int(self.pets_allowed)
-        condo_dict["type"] = self.get_type()
+        condo_dict["type"] = self.home_type
         detached_home_dict["id"] = int(self.id)
         # if self.get_id() is not None:
             # condo_dict["id"] = self.get_id()

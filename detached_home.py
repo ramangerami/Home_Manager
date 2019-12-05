@@ -16,7 +16,7 @@ class DetachedHome(AbstractHome):
 
     def __init__(self, square_feet, year_built, rooms, bathrooms, city, seller, tax, floors, has_suite):
         """ Constructor for Condo object """
-        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax)
+        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax, DetachedHome.DETACHED_HOME_TYPE)
 
         AbstractHome._validate_int_input(DetachedHome.FLOORS_LABEL, floors)
         self.number_of_floors = floors
@@ -41,9 +41,9 @@ class DetachedHome(AbstractHome):
             + self.selling_agent
         return description
 
-    def get_type(self):
-        """ Return type of a DetachedHome Object """
-        return DetachedHome.DETACHED_HOME_TYPE
+    # def get_type(self):
+    #     """ Return type of a DetachedHome Object """
+    #     return DetachedHome.DETACHED_HOME_TYPE
 
     def to_dict(self):
         """ Get a Python Dictionary representation of the Detached Home """
@@ -58,7 +58,7 @@ class DetachedHome(AbstractHome):
         detached_home_dict["number_of_floors"] = int(self.number_of_floors)
         # detached_home_dict["has_rental_suite"] = bool(self.has_rental_suite)
         detached_home_dict["has_rental_suite"] = int(self.has_rental_suite)
-        detached_home_dict["type"] = self.get_type()
+        detached_home_dict["type"] = self.home_type
         detached_home_dict["id"] = int(self.id)
         # if self.get_id() is not None:
             # detached_home_dict["id"] = self.get_id()

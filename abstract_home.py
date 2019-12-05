@@ -12,6 +12,7 @@ class AbstractHome(Base):
     CITY_LABEL = "City Name"
     SELLING_AGENT_LABEL = "Selling Agent Name"
     YEARLY_TAX_LABEL = "Yearly Property Tax"
+    HOME_TYPE_LABEL = "Type of Home"
 
     CURRENT_YEAR = 2019
 
@@ -28,8 +29,8 @@ class AbstractHome(Base):
     city                = Column(String(STRING_LENGTH))
     selling_agent       = Column(String(STRING_LENGTH))
     yearly_property_tax = Column(Float)
+    home_type           = Column(String(20))
 
-    # type = Column(XXX)
 # vehicles from lab 9 for reference
     # id = Column(Integer, primary_key=True)
     # vin = Column(String(100))
@@ -44,7 +45,7 @@ class AbstractHome(Base):
     # sold_price = Column(Float)
     # type = Column(String(5))
 
-    def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax):
+    def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax, type):
         """ Constructor for an Abstract Home Object """
 
         AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
@@ -67,6 +68,11 @@ class AbstractHome(Base):
 
         AbstractHome._validate_float_input(AbstractHome.YEARLY_TAX_LABEL, tax)
         self.yearly_property_tax = tax
+
+        AbstractHome._validate_string_input(AbstractHome.HOME_TYPE_LABEL, type)
+        if len(type) > 20:
+            raise ValueError(AbstractHome.HOME_TYPE_LABEL + "length must be maximum 20 characters long.")
+        self.home_type = type
 
         self.home_id = None
 
