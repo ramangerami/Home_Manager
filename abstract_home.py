@@ -16,27 +16,27 @@ class AbstractHome:
         """ Constructor for an Abstract Home Object """
 
         AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
-        self._square_footage = square_feet
+        self.square_footage = square_feet
 
         AbstractHome._validate_int_input(AbstractHome.YEAR_BUILD_LABEL, year_built)
-        self._year_built = year_built
+        self.year_built = year_built
 
         AbstractHome._validate_int_input(AbstractHome.NUM_ROOMS_LABEL, rooms)
-        self._number_of_rooms = rooms
+        self.number_of_rooms = rooms
 
         AbstractHome._validate_int_input(AbstractHome.NUM_BATHROOMS_LABEL, bathrooms)
-        self._number_of_bathrooms = bathrooms
+        self.number_of_bathrooms = bathrooms
 
         AbstractHome._validate_string_input(AbstractHome.CITY_LABEL, city)
-        self._city = city
+        self.city = city
 
         AbstractHome._validate_string_input(AbstractHome.SELLING_AGENT_LABEL, seller)
-        self._selling_agent = seller
+        self.selling_agent = seller
 
         AbstractHome._validate_float_input(AbstractHome.YEARLY_TAX_LABEL, tax)
-        self._yearly_property_tax = tax
+        self.yearly_property_tax = tax
 
-        self._home_id = None
+        self.home_id = None
 
 # All entity attributes are public (as per SQLAlchemy)
 # so getter and setter methods are no longer required

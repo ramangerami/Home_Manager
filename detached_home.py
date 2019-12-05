@@ -14,10 +14,10 @@ class DetachedHome(AbstractHome):
         super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax)
 
         AbstractHome._validate_int_input(DetachedHome.FLOORS_LABEL, floors)
-        self._number_of_floors = floors
+        self.number_of_floors = floors
 
         AbstractHome._validate_bool_input(DetachedHome.HAS_SUITE_LABEL, has_suite)
-        self._has_rental_suite = has_suite
+        self.has_rental_suite = has_suite
 
     def get_number_of_floors(self):
         """ Returns the number of floors for a DetachedHome object """

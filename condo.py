@@ -14,18 +14,18 @@ class Condo(AbstractHome):
         super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax)
 
         AbstractHome._validate_int_input(Condo.MONTHLY_FEE_LABEL, monthly_fee)
-        self._monthly_strata_fee = monthly_fee
+        self.monthly_strata_fee = monthly_fee
 
         AbstractHome._validate_bool_input(Condo.PETS_ALLOWED_LABEL, pets)
-        self._pets_allowed = pets
+        self.pets_allowed = pets
 
-    def get_monthly_strata_fee(self):
-        """ Returns the monthly strata fee for a Condo """
-        return self._monthly_strata_fee
+    # def get_monthly_strata_fee(self):
+    #     """ Returns the monthly strata fee for a Condo """
+    #     return self._monthly_strata_fee
 
-    def get_pets_allowed(self):
-        """ Returns Boolean value for if pets are allowed in a Condo """
-        return self._pets_allowed
+    # def get_pets_allowed(self):
+    #     """ Returns Boolean value for if pets are allowed in a Condo """
+    #     return self._pets_allowed
 
     def get_description(self):
         """ Returns a description of a Condo object with details relevant to buyers and seller """
