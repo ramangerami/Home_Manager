@@ -32,14 +32,15 @@ class HomeManager:
         # if db_name is None or db_name == "":
             # raise ValueError("DB Name cannot be undefined")
 
-        engine = create_engine("sqlite:///" + db_name)
+        engine = create_engine("sqlite:///" + self._db_filename)
         self._db_session = sessionmaker(bind=engine)
         # DB NAME should be a constructor param.
 
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, home)
-        home.set_id(self._next_available_id)
+        # home.set_id(self._next_available_id)
+        home.id = self._next_available_id
         self._home_listings.append(home)
 
         # self._write_homes_to_file()
@@ -51,7 +52,8 @@ class HomeManager:
         """ Returns a home in the listings based on id, returns none if it doesn't exist in the listings """
         HomeManager._validate_int_input(HomeManager.HOME_ID_LABEL, id_number)
         for home in self._home_listings:
-            if home.get_id() == id_number:
+            # if home.get_id() == id_number:
+            if home.id == id_number:
                 return home
         # return next((home for home in self._home_listings if home.get_id() == id_number), None)
         return None
@@ -74,11 +76,13 @@ class HomeManager:
     def update_home(self, replacement_home):
         """ Takes a home object and replaces an existing home object with the same id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, replacement_home)
-        if self.get_home_by_id(replacement_home.get_id()) is None:
+        # if self.get_home_by_id(replacement_home.get_id()) is None:
+        if self.get_home_by_id(replacement_home.id) is None:
             raise ValueError("Given Home's ID must match one in the listings to update.")
         is_found = False
         for i in range(0, len(self._home_listings)):
-            if self._home_listings[i].get_id() == replacement_home.get_id():
+            # if self._home_listings[i].get_id() == replacement_home.get_id():
+            if self._home_listings[i].id == replacement_home.id:
                 self._home_listings[i] = replacement_home
                 # return self._home_listings[i]
                 # self._write_homes_to_file()
