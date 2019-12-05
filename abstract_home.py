@@ -38,42 +38,46 @@ class AbstractHome:
 
         self._home_id = None
 
-    def get_id(self):
-        """ Returns id of a home object """
-        return self._home_id
+# All entity attributes are public (as per SQLAlchemy)
+# so getter and setter methods are no longer required
+    # def get_id(self):
+    #     """ Returns id of a home object """
+    #     return self._home_id
 
-    def set_id(self, home_id):
-        """ Sets the id of a home object """
-        AbstractHome._validate_int_input(AbstractHome.HOME_ID_LABEL, home_id)
-        self._home_id = home_id
+    # def set_id(self, home_id):
+    #     """ Sets the id of a home object """
+    #     AbstractHome._validate_int_input(AbstractHome.HOME_ID_LABEL, home_id)
+    #     self._home_id = home_id
 
-    def get_square_footage(self):
-        """ Returns square footage of a home object """
-        return self._square_footage
+    # def get_square_footage(self):
+    #     """ Returns square footage of a home object """
+    #     return self._square_footage
 
-    def get_year_built(self):
-        """ Return year a home object was built """
-        return self._year_built
+    # def get_year_built(self):
+    #     """ Return year a home object was built """
+    #     return self._year_built
 
-    def get_number_of_rooms(self):
-        """ Returns number of rooms of a home object """
-        return self._number_of_rooms
+    # def get_number_of_rooms(self):
+    #     """ Returns number of rooms of a home object """
+    #     return self._number_of_rooms
 
-    def get_number_of_bathrooms(self):
-        """ Returns number of bathrooms of a home object """
-        return self._number_of_bathrooms
+    # def get_number_of_bathrooms(self):
+    #     """ Returns number of bathrooms of a home object """
+    #     return self._number_of_bathrooms
 
-    def get_city(self):
-        """ Returns city of a home object """
-        return self._city
+    # def get_city(self):
+    #     """ Returns city of a home object """
+    #     return self._city
 
-    def get_selling_agent(self):
-        """ Returns selling agent of a home object """
-        return self._selling_agent
+    # def get_selling_agent(self):
+    #     """ Returns selling agent of a home object """
+    #     return self._selling_agent
 
-    def get_yearly_property_tax(self):
-        """ Returns the yearly tax of a home object """
-        return self._yearly_property_tax
+    # def get_yearly_property_tax(self):
+    #     """ Returns the yearly tax of a home object """
+    #     return self._yearly_property_tax
+#/ All entity attributes are public (as per SQLAlchemy)
+#/ so getter and setter methods are no longer required
 
     def get_years_old(self):
         """ Returns the age of a home object, assuming the current year is 2019 """

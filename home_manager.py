@@ -119,7 +119,8 @@ class HomeManager:
             years = int(sum(years_list) / len(years_list))
         stats = HomeStats(total_homes, detached_homes, condos, years)
         return stats
-                
+
+# The _read_entities_from_file and _write_entities_to_file methods are no longer need
     # def _read_homes_from_file(self):
     #     """ Loads JSON Home record data from a file """
     #     with open(self._filepath, "r") as homes_file:
@@ -147,6 +148,7 @@ class HomeManager:
     #         json.dump(list_of_homes, homes_file) 
 
     #         # print(list_of_homes)
+#/ The _read_entities_from_file and _write_entities_to_file methods are no longer need
                 
     @classmethod
     def _validate_general_input(cls, display_name, val):
