@@ -19,7 +19,7 @@ class HomeManager:
     def __init__(self, db_filename):
     # def __init__(self):
         """ Constructor for a HomeManager Object """
-        self._home_listings = []
+        # self._home_listings = []
         self._next_available_id = 0
 
         HomeManager._validate_string_input(HomeManager.DB_FILE_NAME_LABEL, db_filename)
