@@ -126,9 +126,9 @@ class AbstractHome(Base):
         """ Returns description of a home object with relevant details to a buyer/seller """
         raise NotImplemented("Method must be implemented")
 
-    def get_type(self):
-        """ Returns the type of a home object """
-        raise NotImplemented("Method must be implemented")
+    # def get_type(self):
+    #     """ Returns the type of a home object """
+    #     raise NotImplemented("Method must be implemented")
 
     def to_dict(self):
         """ Abstract method to return a Dictionary representation of the Home """

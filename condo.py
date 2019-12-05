@@ -28,9 +28,9 @@ class Condo(AbstractHome):
     #     """ Returns the monthly strata fee for a Condo """
     #     return self._monthly_strata_fee
 
-    # def get_pets_allowed(self):
-    #     """ Returns Boolean value for if pets are allowed in a Condo """
-    #     return self._pets_allowed
+    def get_pets_allowed_bool(self):
+        """ Returns Boolean value for if pets are allowed in a Condo """
+        return self.pets_allowed == AbstractHome.BOOLEAN_TRUE
 
     def get_description(self):
         """ Returns a description of a Condo object with details relevant to buyers and seller """
@@ -41,9 +41,9 @@ class Condo(AbstractHome):
             + self.selling_agent
         return description
 
-    def get_type(self):
-        """ Returns the type of a Condo object """
-        return Condo.CONDO_TYPE
+    # def get_type(self):
+    #     """ Returns the type of a Condo object """
+    #     return Condo.CONDO_TYPE
 
     def to_dict(self):
         """ Get a Python Dictionary representation of the Condo """

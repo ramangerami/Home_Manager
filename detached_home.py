@@ -28,9 +28,9 @@ class DetachedHome(AbstractHome):
     #     """ Returns the number of floors for a DetachedHome object """
     #     return self._number_of_floors
 
-    # def get_has_rental_suite(self):
-    #     """ Returns boolean for if a home has a rental suite """
-    #     return self._has_rental_suite
+    def get_has_rental_suite_bool(self):
+        """ Returns boolean for if a home has a rental suite """
+        return self.has_rental_suite == AbstractHome.BOOLEAN_TRUE
 
     def get_description(self):
         """ Returns a description of a DetachedHome object with details relevant to buyers and seller """
