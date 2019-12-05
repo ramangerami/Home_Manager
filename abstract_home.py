@@ -18,13 +18,13 @@ class AbstractHome(Base):
     # __tablename__ = "vehicles"
     __tablename__ = "homes"
 
-    home_id             = Column(XXX)
+    home_id             = Column(Integer, primary_key=True)
     square_footage      = Column(Integer)
     year_built          = Column(Integer)
     number_of_rooms     = Column(Integer)
     number_of_bathrooms = Column(Integer)
-    city                = Column(XXX)
-    selling_agent       = Column(XXX)
+    city                = Column(String(100))
+    selling_agent       = Column(String(100))
     yearly_property_tax = Column(Float)
 
     # type = Column(XXX)
