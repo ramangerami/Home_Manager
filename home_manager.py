@@ -34,6 +34,7 @@ class HomeManager:
 
         engine = create_engine("sqlite:///" + db_name)
         self._db_session = sessionmaker(bind=engine)
+        # DB NAME should be a constructor param.
 
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """
