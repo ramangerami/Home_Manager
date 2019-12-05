@@ -15,20 +15,22 @@ class AbstractHome(Base):
 
     CURRENT_YEAR = 2019
 
-    # __tablename__ = "vehicles"
+    BOOLEAN_TRUE = 1
+    BOOLEAN_FALSE = 0
     __tablename__ = "homes"
 
+    STRING_LENGTH = 100
     home_id             = Column(Integer, primary_key=True)
     square_footage      = Column(Integer)
     year_built          = Column(Integer)
     number_of_rooms     = Column(Integer)
     number_of_bathrooms = Column(Integer)
-    city                = Column(String(100))
-    selling_agent       = Column(String(100))
+    city                = Column(String(STRING_LENGTH))
+    selling_agent       = Column(String(STRING_LENGTH))
     yearly_property_tax = Column(Float)
 
     # type = Column(XXX)
-
+# vehicles from lab 9 for reference
     # id = Column(Integer, primary_key=True)
     # vin = Column(String(100))
     # make = Column(String(100))
@@ -140,6 +142,9 @@ class AbstractHome(Base):
             raise ValueError(display_name + " must be of type: String.")
         if str_val == "":
             raise ValueError(display_name + " cannot be empty string.")
+        if len(str_val) > cls.STRING_LENGTH:
+            raise ValueError(display_name + "is longer than string length.")
+
 
     @classmethod
     def _validate_float_input(cls, display_name, flt_val):
@@ -159,5 +164,7 @@ class AbstractHome(Base):
     def _validate_bool_input(cls, display_name, bool_val):
         """ Used to validate a boolean variable """
         cls._validate_general_input(display_name, bool_val)
-        if type(bool_val) is not bool:
-            raise ValueError(display_name + " must be of type: Boolean.")
+        # if type(bool_val) is not bool:
+        #     raise ValueError(display_name + " must be of type: Boolean.")
+        if bool_val not in (cls.BOOLEAN_FALSE, cls.BOOLEAN_TRUE):
+            raise ValueError(display_name + " must be 0 for False or 1 for True.")
