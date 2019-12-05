@@ -66,14 +66,16 @@ def update_home(id):
             det = DetachedHome(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['number_of_floors'], content['has_rental_suite'])
-            det.set_id(id)
+            # det.set_id(id)
+            det.id = id
             example.update_home(det)
 
         elif content["type"] == "condo":
             con = Condo(content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['monthly_strata_fee'], content['pets_allowed'])
-            con.set_id(id)
+            # con.set_id(id)
+            con.id = id
             example.update_home(con)
 
 
