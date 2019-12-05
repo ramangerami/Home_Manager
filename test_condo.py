@@ -70,79 +70,79 @@ class TestCondo(unittest.TestCase):
         self.assertRaisesRegex(ValueError, "City Name cannot be empty string.", Condo, 6000, 1999, 4, 2, empty_string, "Adrian Gekko", 12.5, 800, False)
         self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be empty string.", Condo, 6000, 1999, 4, 2, "Vancouver", empty_string, 12.5, 800, False)
 
-    def test_condo_get_id_unset(self):
-        """ 020A - Get id of an unset home """
-        self.assertIsNone(self.condo.get_id())
+    # def test_condo_get_id_unset(self):
+    #     """ 020A - Get id of an unset home """
+    #     self.assertIsNone(self.condo.get_id())
         
-    def test_condo_get_id_set(self):
-        """ 020B - Get id of an set home """
-        test_id = 1
-        self.condo.set_id(test_id)
-        self.assertEqual(self.condo.get_id(), test_id)
+    # def test_condo_get_id_set(self):
+    #     """ 020B - Get id of an set home """
+    #     test_id = 1
+    #     self.condo.set_id(test_id)
+    #     self.assertEqual(self.condo.get_id(), test_id)
         
-    def test_condo_set_id_unset_valid(self):
-        """ 030A - Set an id for a home that has not been set """
-        test_id = 2
-        self.assertIsNone(self.condo.get_id())
-        self.condo.set_id(test_id)
-        self.assertEqual(self.condo.get_id(), test_id)
+    # def test_condo_set_id_unset_valid(self):
+    #     """ 030A - Set an id for a home that has not been set """
+    #     test_id = 2
+    #     self.assertIsNone(self.condo.get_id())
+    #     self.condo.set_id(test_id)
+    #     self.assertEqual(self.condo.get_id(), test_id)
         
-    def test_condo_set_id_set_valid(self):
-        """ 030B - Set an id for a home that already has an id set """
-        test_id1 = 5
-        test_id2 = 9
-        self.condo.set_id(test_id1)
-        self.assertEqual(self.condo.get_id(), test_id1)
-        self.condo.set_id(test_id2)
-        self.assertEqual(self.condo.get_id(), test_id2)
+    # def test_condo_set_id_set_valid(self):
+    #     """ 030B - Set an id for a home that already has an id set """
+    #     test_id1 = 5
+    #     test_id2 = 9
+    #     self.condo.set_id(test_id1)
+    #     self.assertEqual(self.condo.get_id(), test_id1)
+    #     self.condo.set_id(test_id2)
+    #     self.assertEqual(self.condo.get_id(), test_id2)
 
-    def test_condo_set_id_set_valid(self):
-        """ 030C - Setting an id with invalid parameters """
-        undefined_input = None
-        # Must reject invalid parameters
-        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.condo.set_id, undefined_input)
-        test_string = "Hello"
-        self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.condo.set_id, test_string)
+    # def test_condo_set_id_set_valid(self):
+    #     """ 030C - Setting an id with invalid parameters """
+    #     undefined_input = None
+    #     # Must reject invalid parameters
+    #     self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.condo.set_id, undefined_input)
+    #     test_string = "Hello"
+    #     self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.condo.set_id, test_string)
 
-    def test_condo_get_square_footage(self):
-        """ 040A - Getting square footage """
-        self.assertEqual(self.condo.get_square_footage(), 6000, "Condo must have valid square footage")
+    # def test_condo_get_square_footage(self):
+    #     """ 040A - Getting square footage """
+    #     self.assertEqual(self.condo.get_square_footage(), 6000, "Condo must have valid square footage")
 
-    def test_condo_get_year_built(self):
-        """ 050A - Getting year built """
-        self.assertEqual(self.condo.get_year_built(), 1999, "Condo must have valid year built")
+    # def test_condo_get_year_built(self):
+    #     """ 050A - Getting year built """
+    #     self.assertEqual(self.condo.get_year_built(), 1999, "Condo must have valid year built")
 
-    def test_condo_get_number_of_rooms(self):
-        """ 060A - Getting square footage """
-        self.assertEqual(self.condo.get_number_of_rooms(), 4, "Condo must have valid number of rooms")
+    # def test_condo_get_number_of_rooms(self):
+    #     """ 060A - Getting square footage """
+    #     self.assertEqual(self.condo.get_number_of_rooms(), 4, "Condo must have valid number of rooms")
 
-    def test_condo_get_number_of_bathrooms(self):
-        """ 070A - Getting square footage """
-        self.assertEqual(self.condo.get_number_of_bathrooms(), 2, "Condo must have valid number of bathrooms")
+    # def test_condo_get_number_of_bathrooms(self):
+    #     """ 070A - Getting square footage """
+    #     self.assertEqual(self.condo.get_number_of_bathrooms(), 2, "Condo must have valid number of bathrooms")
 
-    def test_condo_get_city(self):
-        """ 080A - Getting city """
-        self.assertEqual(self.condo.get_city(), "Vancouver", "Condo must have valid city")
+    # def test_condo_get_city(self):
+    #     """ 080A - Getting city """
+    #     self.assertEqual(self.condo.get_city(), "Vancouver", "Condo must have valid city")
 
-    def test_condo_get_selling_agent(self):
-        """ 090A - Getting selling agent """
-        self.assertEqual(self.condo.get_selling_agent(), "Adrian Gekko", "Condo must have valid agent")
+    # def test_condo_get_selling_agent(self):
+    #     """ 090A - Getting selling agent """
+    #     self.assertEqual(self.condo.get_selling_agent(), "Adrian Gekko", "Condo must have valid agent")
 
-    def test_condo_get_yearly_property_tax(self):
-        """ 100A - Getting yearly property tax """
-        self.assertEqual(self.condo.get_yearly_property_tax(), 12.5, "Condo must have valid tax")
+    # def test_condo_get_yearly_property_tax(self):
+    #     """ 100A - Getting yearly property tax """
+    #     self.assertEqual(self.condo.get_yearly_property_tax(), 12.5, "Condo must have valid tax")
 
-    def test_condo_get_type(self):
-        """ 110A - Getting type """
-        self.assertEqual(self.condo.get_type(), "condo", "Condo must be a condo")
+    # def test_condo_get_type(self):
+    #     """ 110A - Getting type """
+    #     self.assertEqual(self.condo.get_type(), "condo", "Condo must be a condo")
 
-    def test_condo_get_monthly_strata_fee(self):
-        """ 120A - Getting strata fee """
-        self.assertEqual(self.condo.get_monthly_strata_fee(), 800, "Condo must have valid monthly fee")
+    # def test_condo_get_monthly_strata_fee(self):
+    #     """ 120A - Getting strata fee """
+    #     self.assertEqual(self.condo.get_monthly_strata_fee(), 800, "Condo must have valid monthly fee")
 
-    def test_condo_get_pets_allowed(self):
-        """ 130A - Getting whether pets are allowed """
-        self.assertEqual(self.condo.get_pets_allowed(), False, "Condo must have valid pets allowed flag")
+    # def test_condo_get_pets_allowed(self):
+    #     """ 130A - Getting whether pets are allowed """
+    #     self.assertEqual(self.condo.get_pets_allowed(), False, "Condo must have valid pets allowed flag")
 
     def test_get_years_old_positive(self):
         """ 140A - Getting years old for a build year before current year """

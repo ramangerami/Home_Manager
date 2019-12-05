@@ -70,79 +70,79 @@ class TestDetachedHome(unittest.TestCase):
         self.assertRaisesRegex(ValueError, "City Name cannot be empty string.", DetachedHome, 12000, 2010, 18, 3, empty_string, "Camelia Stewart", 0.25, 800, True)
         self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be empty string.", DetachedHome, 12000, 2010, 18, 3, "Richmond", empty_string, 0.25, 800, True)
 
-    def test_detached_home_get_id_unset(self):
-        """ 020A - Get id of an unset home """
-        self.assertIsNone(self.detached_home.get_id())
+    # def test_detached_home_get_id_unset(self):
+    #     """ 020A - Get id of an unset home """
+    #     self.assertIsNone(self.detached_home.get_id())
         
-    def test_detached_home_get_id_set(self):
-        """ 020B - Get id of an set home """
-        test_id = 1
-        self.detached_home.set_id(test_id)
-        self.assertEqual(self.detached_home.get_id(), test_id)
+    # def test_detached_home_get_id_set(self):
+    #     """ 020B - Get id of an set home """
+    #     test_id = 1
+    #     self.detached_home.set_id(test_id)
+    #     self.assertEqual(self.detached_home.get_id(), test_id)
         
-    def test_detached_home_set_id_unset_valid(self):
-        """ 030A - Set an id for a home that has not been set """
-        test_id = 2
-        self.assertIsNone(self.detached_home.get_id())
-        self.detached_home.set_id(test_id)
-        self.assertEqual(self.detached_home.get_id(), test_id)
+    # def test_detached_home_set_id_unset_valid(self):
+    #     """ 030A - Set an id for a home that has not been set """
+    #     test_id = 2
+    #     self.assertIsNone(self.detached_home.get_id())
+    #     self.detached_home.set_id(test_id)
+    #     self.assertEqual(self.detached_home.get_id(), test_id)
         
-    def test_detached_home_set_id_set_valid(self):
-        """ 030B - Set an id for a home that already has an id set """
-        test_id1 = 5
-        test_id2 = 9
-        self.detached_home.set_id(test_id1)
-        self.assertEqual(self.detached_home.get_id(), test_id1)
-        self.detached_home.set_id(test_id2)
-        self.assertEqual(self.detached_home.get_id(), test_id2)
+    # def test_detached_home_set_id_set_valid(self):
+    #     """ 030B - Set an id for a home that already has an id set """
+    #     test_id1 = 5
+    #     test_id2 = 9
+    #     self.detached_home.set_id(test_id1)
+    #     self.assertEqual(self.detached_home.get_id(), test_id1)
+    #     self.detached_home.set_id(test_id2)
+    #     self.assertEqual(self.detached_home.get_id(), test_id2)
 
-    def test_detached_home_set_id_set_valid(self):
-        """ 030C - Setting an id with invalid parameters """
-        undefined_input = None
-        # Must reject invalid parameters
-        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.detached_home.set_id, undefined_input)
-        test_string = "Hello"
-        self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.detached_home.set_id, test_string)
+    # def test_detached_home_set_id_set_valid(self):
+    #     """ 030C - Setting an id with invalid parameters """
+    #     undefined_input = None
+    #     # Must reject invalid parameters
+    #     self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", self.detached_home.set_id, undefined_input)
+    #     test_string = "Hello"
+    #     self.assertRaisesRegex(ValueError, "Home ID must be of type: Integer", self.detached_home.set_id, test_string)
 
-    def test_detached_home_get_square_footage(self):
-        """ 040A - Getting square footage """
-        self.assertEqual(self.detached_home.get_square_footage(), 12000, "Detached Home must have valid square footage")
+    # def test_detached_home_get_square_footage(self):
+    #     """ 040A - Getting square footage """
+    #     self.assertEqual(self.detached_home.get_square_footage(), 12000, "Detached Home must have valid square footage")
 
-    def test_detached_home_get_year_built(self):
-        """ 050A - Getting year built """
-        self.assertEqual(self.detached_home.get_year_built(), 2010, "Detached Home must have valid year built")
+    # def test_detached_home_get_year_built(self):
+    #     """ 050A - Getting year built """
+    #     self.assertEqual(self.detached_home.get_year_built(), 2010, "Detached Home must have valid year built")
 
-    def test_detached_home_get_number_of_rooms(self):
-        """ 060A - Getting square footage """
-        self.assertEqual(self.detached_home.get_number_of_rooms(), 18, "Detached Home must have valid number of rooms")
+    # def test_detached_home_get_number_of_rooms(self):
+    #     """ 060A - Getting square footage """
+    #     self.assertEqual(self.detached_home.get_number_of_rooms(), 18, "Detached Home must have valid number of rooms")
 
-    def test_detached_home_get_number_of_bathrooms(self):
-        """ 070A - Getting square footage """
-        self.assertEqual(self.detached_home.get_number_of_bathrooms(), 3, "Detached Home must have valid number of bathrooms")
+    # def test_detached_home_get_number_of_bathrooms(self):
+    #     """ 070A - Getting square footage """
+    #     self.assertEqual(self.detached_home.get_number_of_bathrooms(), 3, "Detached Home must have valid number of bathrooms")
 
-    def test_detached_home_get_city(self):
-        """ 080A - Getting city """
-        self.assertEqual(self.detached_home.get_city(), "Richmond", "Detached Home must have valid city")
+    # def test_detached_home_get_city(self):
+    #     """ 080A - Getting city """
+    #     self.assertEqual(self.detached_home.get_city(), "Richmond", "Detached Home must have valid city")
 
-    def test_detached_home_get_selling_agent(self):
-        """ 090A - Getting selling agent """
-        self.assertEqual(self.detached_home.get_selling_agent(), "Camelia Stewart", "Detached Home must have valid agent")
+    # def test_detached_home_get_selling_agent(self):
+    #     """ 090A - Getting selling agent """
+    #     self.assertEqual(self.detached_home.get_selling_agent(), "Camelia Stewart", "Detached Home must have valid agent")
 
-    def test_detached_home_get_yearly_property_tax(self):
-        """ 100A - Getting yearly property tax """
-        self.assertEqual(self.detached_home.get_yearly_property_tax(), 0.25, "Detached Home must have valid tax")
+    # def test_detached_home_get_yearly_property_tax(self):
+    #     """ 100A - Getting yearly property tax """
+    #     self.assertEqual(self.detached_home.get_yearly_property_tax(), 0.25, "Detached Home must have valid tax")
 
-    def test_detached_home_get_type(self):
-        """ 110A - Getting type """
-        self.assertEqual(self.detached_home.get_type(), "detached home", "Detached Home must be a detached home")
+    # def test_detached_home_get_type(self):
+    #     """ 110A - Getting type """
+    #     self.assertEqual(self.detached_home.get_type(), "detached home", "Detached Home must be a detached home")
 
-    def test_detached_home_get_number_of_floors(self):
-        """ 120A - Getting number of floors """
-        self.assertEqual(self.detached_home.get_number_of_floors(), 3, "Detached Home must have valid Number of Floors")
+    # def test_detached_home_get_number_of_floors(self):
+    #     """ 120A - Getting number of floors """
+    #     self.assertEqual(self.detached_home.get_number_of_floors(), 3, "Detached Home must have valid Number of Floors")
 
-    def test_detached_home_get_has_rental_suite(self):
-        """ 130A - Getting whether it has a rental suite """
-        self.assertEqual(self.detached_home.get_has_rental_suite(), True, "Detached Home must have valid Has Suite flag")
+    # def test_detached_home_get_has_rental_suite(self):
+    #     """ 130A - Getting whether it has a rental suite """
+    #     self.assertEqual(self.detached_home.get_has_rental_suite(), True, "Detached Home must have valid Has Suite flag")
 
     def test_get_years_old_positive(self):
         """ 140A - Getting years old for a build year before current year """
