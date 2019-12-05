@@ -27,6 +27,14 @@ class HomeManager:
 
         self._read_homes_from_file()
 
+        # DB NAME should be a constructor param.
+        db_name = "PLACEHOLDER DATABASE NAME"
+        if db_name is None or db_name == "":
+            raise ValueError("DB Name cannot be undefined")
+
+        engine = create_engine("sqlite:///" + db_name)
+        self._db_session = sessionmaker(bind=engine)
+
     def add_home(self, home):
         """ Adds a home to the listings, assigning it a unique id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, home)
