@@ -14,23 +14,23 @@ class HomeManager:
     HOME_OBJECT_LABEL = "Home object"
     HOME_ID_LABEL = "Home ID"
     HOME_TYPE_LABEL = "Type of Home"
-    FILE_PATH_LABEL = "File path"
+    DB_FILE_NAME_LABEL = "Database File name"
 
-    def __init__(self, filepath):
+    def __init__(self, db_filename):
     # def __init__(self):
         """ Constructor for a HomeManager Object """
         self._home_listings = []
         self._next_available_id = 0
 
-        HomeManager._validate_string_input(HomeManager.FILE_PATH_LABEL, filepath)
-        self._filepath = filepath
+        HomeManager._validate_string_input(HomeManager.DB_FILE_NAME_LABEL, db_filename)
+        self._db_filename = db_filename
 
-        self._read_homes_from_file()
+        # self._read_homes_from_file()
 
         # DB NAME should be a constructor param.
-        db_name = "PLACEHOLDER DATABASE NAME"
-        if db_name is None or db_name == "":
-            raise ValueError("DB Name cannot be undefined")
+        # db_name = "PLACEHOLDER DATABASE NAME"
+        # if db_name is None or db_name == "":
+            # raise ValueError("DB Name cannot be undefined")
 
         engine = create_engine("sqlite:///" + db_name)
         self._db_session = sessionmaker(bind=engine)
@@ -42,7 +42,7 @@ class HomeManager:
         home.set_id(self._next_available_id)
         self._home_listings.append(home)
 
-        self._write_homes_to_file()
+        # self._write_homes_to_file()
         
         self._next_available_id += 1
         return self._next_available_id - 1
@@ -81,7 +81,7 @@ class HomeManager:
             if self._home_listings[i].get_id() == replacement_home.get_id():
                 self._home_listings[i] = replacement_home
                 # return self._home_listings[i]
-                self._write_homes_to_file()
+                # self._write_homes_to_file()
                 is_found = True
                 break;
         # next((home for home in self._home_listings if home.get_id() == replacement_home.get_id()), ValueError("Home with same ID was not found"))
@@ -98,7 +98,7 @@ class HomeManager:
         for home in self._home_listings:
             if home.get_id() == home_id:
                 self._home_listings.remove(home)
-                self._write_homes_to_file()
+                # self._write_homes_to_file()
                 break
 
     def get_listing_stats(self):
@@ -120,33 +120,33 @@ class HomeManager:
         stats = HomeStats(total_homes, detached_homes, condos, years)
         return stats
                 
-    def _read_homes_from_file(self):
-        """ Loads JSON Home record data from a file """
-        with open(self._filepath, "r") as homes_file:
-            list_of_homes = json.load(homes_file)
-            for home in list_of_homes:
-                if home["type"] == Condo.CONDO_TYPE:
-                    condo = Condo(home["square_feet"], home["year_built"], home["number_of_rooms"], \
-                            home["number_of_bathrooms"], home["city"], home["selling_agent"], home["yearly_property_tax"], \
-                            home["monthly_strata_fee"], home["pets_allowed"])
-                    self.add_home(condo)
-                elif home["type"] == DetachedHome.DETACHED_HOME_TYPE:
-                    detached_home = DetachedHome(home["square_feet"], home["year_built"], home["number_of_rooms"], \
-                            home["number_of_bathrooms"], home["city"], home["selling_agent"], home["yearly_property_tax"], \
-                            home["number_of_floors"], home["has_rental_suite"])
-                    self.add_home(detached_home)
-                else:
-                    raise ValueError("Home type not recognized")
+    # def _read_homes_from_file(self):
+    #     """ Loads JSON Home record data from a file """
+    #     with open(self._filepath, "r") as homes_file:
+    #         list_of_homes = json.load(homes_file)
+    #         for home in list_of_homes:
+    #             if home["type"] == Condo.CONDO_TYPE:
+    #                 condo = Condo(home["square_feet"], home["year_built"], home["number_of_rooms"], \
+    #                         home["number_of_bathrooms"], home["city"], home["selling_agent"], home["yearly_property_tax"], \
+    #                         home["monthly_strata_fee"], home["pets_allowed"])
+    #                 self.add_home(condo)
+    #             elif home["type"] == DetachedHome.DETACHED_HOME_TYPE:
+    #                 detached_home = DetachedHome(home["square_feet"], home["year_built"], home["number_of_rooms"], \
+    #                         home["number_of_bathrooms"], home["city"], home["selling_agent"], home["yearly_property_tax"], \
+    #                         home["number_of_floors"], home["has_rental_suite"])
+    #                 self.add_home(detached_home)
+    #             else:
+    #                 raise ValueError("Home type not recognized")
                 
-    def _write_homes_to_file(self):
-        """ Overwrites JSON Home record data to a file """
-        with open(self._filepath, 'w') as homes_file:
-            list_of_homes = list()
-            for home in self._home_listings:
-                list_of_homes.append(home.to_dict())
-            json.dump(list_of_homes, homes_file) 
+    # def _write_homes_to_file(self):
+    #     """ Overwrites JSON Home record data to a file """
+    #     with open(self._filepath, 'w') as homes_file:
+    #         list_of_homes = list()
+    #         for home in self._home_listings:
+    #             list_of_homes.append(home.to_dict())
+    #         json.dump(list_of_homes, homes_file) 
 
-            # print(list_of_homes)
+    #         # print(list_of_homes)
                 
     @classmethod
     def _validate_general_input(cls, display_name, val):

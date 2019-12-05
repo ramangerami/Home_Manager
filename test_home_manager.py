@@ -8,13 +8,22 @@ from home_manager import HomeManager
 
 from sqlalchemy import create_engine
 from base import Base
+import os
 
 class TestCondo(unittest.TestCase):
     """ Unit Tests for the Home Manager """
 
     # @patch('builtins.open', mock_open(read_data='{}'))
     def setUp(self):
-        """ Creates a test fixture before each method is run """
+        """ Creates a test database before each method is run """
+        self.db.filename = "test_vehicles"
+        self.db.filename += ".sqlite"
+        engine = create_engine("sqlite:///"+self.db.filename)
+
+        # Creates all the tables
+        Base.metadata.create_all(engine)
+        Base.metadata.bind = engine
+
         self.condo1 = Condo(6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
         self.condo2 = Condo(7000, 2012, 5, 6, "White Rock", "Betty Anderson", 8.0, 120, True)
         self.condo3 = Condo(15000, 2019, 8, 12, "Surrey", "Kyle Moignahan", 1.5, 1357, False)
@@ -23,15 +32,17 @@ class TestCondo(unittest.TestCase):
         self.detached_home2 = DetachedHome(800, 1990, 18, 1, "West Vancouver", "Spaghetti Alfredo", 5.0, 6, False)
         self.detached_home3 = DetachedHome(9500, 2019, 2, 0, "Coquitlam", "John Smiff", 1.3, 10, True)
 
-        self.filename = "home_records.txt"
-        self.home_manager = HomeManager(self.filename)
+        # self.filename = "home_records.txt"
+        self.home_manager = HomeManager(self.db.filename)
         self.assertIsNotNone(self.home_manager, "Home Manager must be defined.")
 
         self.logPoint()
     
     def tearDown(self):
-        """ Resets the variables after each method is run """
+        """ Resets the variables and deletes test database after each method is run """
+        os.remove(self.db.filename)
         self.logPoint()
+
 
     def logPoint(self):
         """ Prints the current running method as it is running """
