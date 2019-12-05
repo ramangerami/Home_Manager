@@ -29,11 +29,11 @@ class Condo(AbstractHome):
 
     def get_description(self):
         """ Returns a description of a Condo object with details relevant to buyers and seller """
-        description = "This is a " + str(self._square_footage) + " square foot condo " + "built in " + str(self._year_built)\
-            + " " + "with " + str(self._number_of_rooms) + " rooms, "\
-            + str(self._number_of_bathrooms) + " bathrooms"\
-            + " and a monthly strata fee of " + str(self._monthly_strata_fee) + ". This home is being sold by "\
-            + self._selling_agent
+        description = "This is a " + str(self.square_footage) + " square foot condo " + "built in " + str(self.year_built)\
+            + " " + "with " + str(self.number_of_rooms) + " rooms, "\
+            + str(self.number_of_bathrooms) + " bathrooms"\
+            + " and a monthly strata fee of " + str(self.monthly_strata_fee) + ". This home is being sold by "\
+            + self.selling_agent
         return description
 
     def get_type(self):
