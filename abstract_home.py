@@ -27,8 +27,8 @@ class AbstractHome(Base):
     year_built          = Column(Integer, nullable=False)
     number_of_rooms     = Column(Integer, nullable=False)
     number_of_bathrooms = Column(Integer, nullable=False)
-    city                = Column(String(AbstractHome.STRING_LENGTH), nullable=False)
-    selling_agent       = Column(String(AbstractHome.STRING_LENGTH), nullable=False)
+    city                = Column(String(STRING_LENGTH), nullable=False)
+    selling_agent       = Column(String(STRING_LENGTH), nullable=False)
     yearly_property_tax = Column(Float, nullable=False)
     home_type           = Column(String(20), nullable=False)
 
