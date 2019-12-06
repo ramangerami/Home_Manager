@@ -64,6 +64,7 @@ class MainAppController(tk.Frame):
         self.add_home_btn['text'] = "Add "+selection.upper()
         self.delete_home_btn['text'] = "Delete "+selection.upper()
         self.update_home_btn['text'] = "Update "+selection.upper()
+        self.detail_home_btn['text'] = "Details "+selection.upper()
         # print(selection)
         response = requests.get("http://127.0.0.1:5000/homemanager/homes/descriptions/"+selection)
 
