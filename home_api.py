@@ -178,28 +178,28 @@ def get_homes_by_type(type):
         return response
 
 
-# @app.route('/homemanager/homes/descriptions/<string:type>', methods=['GET'])
-# def get_descriptions_by_type(type):
-#     """ Returns all home descriptions of a certain type """
-#     try:
-#         homes_by_type = example.get_all_homes_by_type(type)
-#         dicted = list()
-#         for home in homes_by_type:
-#             print(home.get_description())
-#             dicted.append(home.get_description())
-#         response = app.response_class(
-#             status=200,
-#             response=json.dumps(dicted),
-#             mimetype='applications/json'
-#         )   
-#         return response
+@app.route('/homemanager/homes/descriptions/<string:type>', methods=['GET'])
+def get_descriptions_by_type(type):
+    """ Returns all home descriptions of a certain type """
+    try:
+        homes_by_type = example.get_all_homes_by_type(type)
+        dicted = list()
+        for home in homes_by_type:
+            print(home.get_description())
+            dicted.append(home.get_description())
+        response = app.response_class(
+            status=200,
+            response=json.dumps(dicted),
+            mimetype='applications/json'
+        )   
+        return response
 
-#     except ValueError as e:
-#         response = app.response_class(
-#             response=str("Type is not valid"),
-#             status=400
-#         )
-#         return response
+    except ValueError as e:
+        response = app.response_class(
+            response=str("Type is not valid"),
+            status=400
+        )
+        return response
 
 
 

@@ -14,7 +14,7 @@ class MainAppController(tk.Frame):
         tk.Frame.__init__(self, parent)
 
         tk.Label(self, text="Home Listings").grid(row=1, column=2)
-        self._homes_listbox = tk.Listbox(self, width=70)
+        self._homes_listbox = tk.Listbox(self, width=150)
         self._homes_listbox.grid(row=2, column=1, columnspan=5)
 
         self._home_listings = []
@@ -28,11 +28,11 @@ class MainAppController(tk.Frame):
         specific.set("condo")
         self.specific = specific
         self.selection_label = tk.Label(self, text=self.specific.get())
-        self.selection_label.grid(row=3, column=7)
+        self.selection_label.grid(row=3, column=2)
 
-        tk.Button(self, text="Print var", command=self.print_var).grid(row=3,column=1)
-        tk.Radiobutton(self, text="Condo", variable=specific, value="condo", command=self.print_var).grid(row=4,column=1)
-        tk.Radiobutton(self, text="Detached Home", variable=specific, value="detached home", command=self.print_var).grid(row=4,column=2)
+        tk.Button(self, text="Reload", command=self._update_listings).grid(row=3,column=1)
+        tk.Radiobutton(self, text="Condo", variable=specific, value="condo", command=self._update_listings).grid(row=4,column=1)
+        tk.Radiobutton(self, text="Detached Home", variable=specific, value="detached home", command=self._update_listings).grid(row=4,column=2)
 
         # tk.Button(self, text="Add Car", command=self._add_car).grid(row=3, column=1)
         # tk.Button(self, text="Add Truck", command=self._add_truck).grid(row=3, column=2)
@@ -44,12 +44,12 @@ class MainAppController(tk.Frame):
 
 
 
-    def print_var(self):
-        """ Changes the label showing what you selected on the Radio """
+    def _update_listings(self):
+        """ Changes the listing based on the Radio selection """
         selection = self.specific.get()
         self.selection_label['text'] = selection
-        print(selection)
-        response = requests.get("http://127.0.0.1:5000/homemanager/homes/all/"+selection)
+        # print(selection)
+        response = requests.get("http://127.0.0.1:5000/homemanager/homes/descriptions/"+selection)
 
         if response.status_code != 200:
 
@@ -77,7 +77,7 @@ class MainAppController(tk.Frame):
     def _update_homes_list(self):
         """ Update the List of Home Descriptions """
         self._update_homes_stats()
-        self.print_var()
+        self._update_listings()
 
     # def _update_homes_list(self):
     #     """ Update the List of Home Descriptions """
