@@ -1,14 +1,12 @@
 import tkinter as tk
 from tkinter import messagebox
-
 import requests
+
 from add_condo_popup import AddCondoPopup
 from add_detached_home_popup import AddDetachedHomePopup
+
 from update_condo_popup import UpdateCondoPopup
 from updated_detached_home import UpdateDetachedHomePopup
-# from add_truck_popup import AddTruckPopup
-# from sell_popup import SellPopup
-# from remove_popup import RemovePopup
 
 
 class MainAppController(tk.Frame):
@@ -47,11 +45,6 @@ class MainAppController(tk.Frame):
         self.delete_home_btn.grid(row=4, column=4)
         self.update_home_btn = tk.Button(self, text="Update Home", command=self._update_home)
         self.update_home_btn.grid(row=3, column=1)
-
-        # tk.Button(self, text="Add Truck", command=self._add_truck).grid(row=3, column=2)
-        # tk.Button(self, text="Sell Vehicle", command=self._sell_vehicle).grid(row=3, column=3)
-        # tk.Button(self, text="Remove Vehicle", command=self._remove_vehicle).grid(row=3, column=4)
-        # tk.Button(self, text="Quit", command=self._quit_callback).grid(row=4, column=2)
 
         self._update_homes_list()
 
@@ -93,7 +86,7 @@ class MainAppController(tk.Frame):
 
 
     def _update_homes_list(self):
-        """ Update the List of Home Descriptions """
+        """ Update both listings and stats """
         self._update_homes_stats()
         self._update_listings()
 
@@ -111,7 +104,7 @@ class MainAppController(tk.Frame):
             print("Home type not found")
 
     def _update_home(self):
-        """ Add Home Popup """
+        """ Update Home Popup """
         selection = self.specific.get()
         self._popup_win = tk.Toplevel()
         cursor = self._homes_listbox.curselection()
