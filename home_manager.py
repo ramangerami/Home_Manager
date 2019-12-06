@@ -69,11 +69,14 @@ class HomeManager:
         session = self._db_session()
 
         home = session.query(AbstractHome).filter(AbstractHome.home_id == id_number).first()
-        if home.type == Condo.CONDO_TYPE:
+        if home is None:
+            pass
+        elif home.home_type == Condo.CONDO_TYPE:
             home = session.query(Condo).filter(Condo.home_id == id_number).first()
-        elif home.type == DetachedHome.DETACHED_HOME_TYPE:
+        elif home.home_type == DetachedHome.DETACHED_HOME_TYPE:
             home = session.query(DetachedHome).filter(DetachedHome.home_id == id_number).first()
         else:
+            session.close() 
             raise ValueError("The type of home you are trying to find is nto supported")
 
         session.close() 
@@ -95,12 +98,14 @@ class HomeManager:
         HomeManager._validate_string_input(HomeManager.HOME_TYPE_LABEL, home_type)
         if home_type not in ["condo", "detached home"]:
             raise ValueError("Home Type is invalid")
+        session = self._db_session()
         results = []
         if home_type == Condo.CONDO_TYPE:
-            results = session.query(Condo).filter(Condo.type == Condo.CONDO_TYPE).all()
+            results = session.query(Condo).filter(Condo.home_type == Condo.CONDO_TYPE).all()
         elif home_type == DetachedHome.DETACHED_HOME_TYPE:
-            results = session.query(DetachedHome).filter(DetachedHome.type == DetachedHome.CONDO_TYPE).all()
+            results = session.query(DetachedHome).filter(DetachedHome.home_type == DetachedHome.DETACHED_HOME_TYPE).all()
         else:
+            session.close()
             raise ValueError("Home Type is invalid")
 
         session.close()
@@ -109,37 +114,46 @@ class HomeManager:
     def update_home(self, replacement_home):
         """ Takes a home object and replaces an existing home object with the same id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, replacement_home)
+        # print(replacement_home.home_id)
         # if self.get_home_by_id(replacement_home.get_id()) is None:
         #TODO
-        if self.get_home_by_id(replacement_home.id) is None:
+        old_home = self.get_home_by_id(replacement_home.home_id)
+        if old_home is None:
             raise ValueError("Given Home's ID must match one in the listings to update.")
-        session = self._db_session()
+        # session = self._db_session()
 
-        home = session.query(Car).filter(Car.vin == vin).first()
-        if home is None:
-            home = session.query(Truck).filter(Truck.vin == vin).first()
+        # home = session.query(Car).filter(Car.vin == vin).first()
+        # if home is None:
+        #     home = session.query(Truck).filter(Truck.vin == vin).first()
 
-        if home is None:
-            session.close()
-            raise ValueError("Could not find vehicle by VIN")
+        # if home is None:
+        #     session.close()
+        #     raise ValueError("Could not find vehicle by VIN")
 
-        vehicle.sell_vehicle(sold_price)
-        session.commit()
+        # # vehicle.sell_vehicle(sold_price)
 
-        session.close()
-        is_found = False
-        for i in range(0, len(self._home_listings)):
-            # if self._home_listings[i].get_id() == replacement_home.get_id():
-            if self._home_listings[i].id == replacement_home.id:
-                self._home_listings[i] = replacement_home
-                # return self._home_listings[i]
-                # self._write_homes_to_file()
-                is_found = True
-                break;
+        # print("updating:", replacement_home)
+        try:
+            self.delete_home(old_home.id)
+            self.add_home(replacement_home)
+        except Exception as e:
+            self.add_home(old_home)
+        # session.commit()
+
+        # session.close()
+        # is_found = False
+        # for i in range(0, len(self._home_listings)):
+        #     # if self._home_listings[i].get_id() == replacement_home.get_id():
+        #     if self._home_listings[i].id == replacement_home.id:
+        #         self._home_listings[i] = replacement_home
+        #         # return self._home_listings[i]
+        #         # self._write_homes_to_file()
+        #         is_found = True
+        #         break;
         # next((home for home in self._home_listings if home.get_id() == replacement_home.get_id()), ValueError("Home with same ID was not found"))
         # return None
-        if not is_found:
-            raise ValueError("Given Home's ID must match one in the listings to update.")
+        # if not is_found:
+        #     raise ValueError("Given Home's ID must match one in the listings to update.")
 
 
     def delete_home(self, home_id):
@@ -175,9 +189,9 @@ class HomeManager:
         for home in home_listings:
             total_homes += 1
             years_list.append(home.get_years_old())
-            if home.type == DetachedHome.DETACHED_HOME_TYPE:
+            if home.home_type == DetachedHome.DETACHED_HOME_TYPE:
                 detached_homes += 1
-            elif home.type == Condo.CONDO_TYPE:
+            elif home.home_type == Condo.CONDO_TYPE:
                 condos += 1
         years = 0
         if len(years_list) > 0:

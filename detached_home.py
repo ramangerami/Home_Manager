@@ -11,8 +11,8 @@ class DetachedHome(AbstractHome):
     DETACHED_HOME_TYPE = 'detached home'
 
     # booleans are represented as Integer 0 and 1
-    number_of_floors = Column(Integer, nullable=False)
-    has_rental_suite = Column(Integer, nullable=False)
+    number_of_floors = Column(Integer)
+    has_rental_suite = Column(Integer)
 
     def __init__(self, home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, floors, has_suite):
         """ Constructor for Condo object """
