@@ -21,7 +21,8 @@ class AbstractHome(Base):
     __tablename__ = "homes"
 
     STRING_LENGTH = 100
-    home_id             = Column(Integer, primary_key=True)
+    id             = Column(Integer, primary_key=True)
+    home_id             = Column(Integer, nullable=False)
     square_footage      = Column(Integer, nullable=False)
     year_built          = Column(Integer, nullable=False)
     number_of_rooms     = Column(Integer, nullable=False)
