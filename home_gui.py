@@ -40,8 +40,10 @@ class MainAppController(tk.Frame):
 
         self.add_home_btn = tk.Button(self, text="Add "+self.specific.get().upper(), command=self._add_home)
         self.add_home_btn.grid(row=3, column=3)
-        tk.Button(self, text="Delete Home", command=self._delete_home).grid(row=4, column=4)
-        tk.Button(self, text="Update Home", command=self._update_home).grid(row=3, column=1)
+        self.delete_home_btn = tk.Button(self, text="Delete Home", command=self._delete_home)
+        self.delete_home_btn.grid(row=4, column=4)
+        self.update_home_btn = tk.Button(self, text="Update Home", command=self._update_home)
+        self.update_home_btn.grid(row=3, column=1)
 
         # tk.Button(self, text="Add Truck", command=self._add_truck).grid(row=3, column=2)
         # tk.Button(self, text="Sell Vehicle", command=self._sell_vehicle).grid(row=3, column=3)
@@ -57,6 +59,8 @@ class MainAppController(tk.Frame):
         selection = self.specific.get()
         self.selection_label['text'] = selection
         self.add_home_btn['text'] = "Add "+selection.upper()
+        self.delete_home_btn['text'] = "Delete "+selection.upper()
+        self.update_home_btn['text'] = "Update "+selection.upper()
         # print(selection)
         response = requests.get("http://127.0.0.1:5000/homemanager/homes/descriptions/"+selection)
 
@@ -118,7 +122,7 @@ class MainAppController(tk.Frame):
         if selection == "condo":
             self._popup = UpdateCondoPopup(home["id"], self._popup_win, self._close_home_cb)
         elif selection == "detached home":
-            print("DETACHED HOME ADD")
+            print("DETACHED HOME UPDATE")
         else:
             print("Home type not found")
 
