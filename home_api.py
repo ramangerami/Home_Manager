@@ -20,13 +20,13 @@ def add_home():
 
     try:
         if content["type"] == "detached home":
-            det = DetachedHome(content['home_id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
+            det = DetachedHome(content['id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['number_of_floors'], content['has_rental_suite'])
             example.add_home(det)
 
         elif content["type"] == "condo":
-            con = Condo(content['home_id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
+            con = Condo(content['id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['monthly_strata_fee'], content['pets_allowed'])
             example.add_home(con)
@@ -63,7 +63,7 @@ def update_home(id):
         return response
     try:
         if content["type"] == "detached home":
-            det = DetachedHome(content['home_id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
+            det = DetachedHome(content['id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['number_of_floors'], content['has_rental_suite'])
             # det.set_id(id)
@@ -71,7 +71,7 @@ def update_home(id):
             example.update_home(det)
 
         elif content["type"] == "condo":
-            con = Condo(content['home_id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
+            con = Condo(content['id'], content['square_feet'], content['year_built'], content['number_of_rooms'],
                         content['number_of_bathrooms'], content['city'], content['selling_agent'], content['yearly_property_tax'],
                         content['monthly_strata_fee'], content['pets_allowed'])
             # con.set_id(id)

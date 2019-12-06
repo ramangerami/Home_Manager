@@ -48,7 +48,6 @@ class DetachedHome(AbstractHome):
     def to_dict(self):
         """ Get a Python Dictionary representation of the Detached Home """
         detached_home_dict = dict()
-        detached_home_dict["home_id"] = int(self.home_id)
         detached_home_dict["square_feet"] = int(self.square_footage)
         detached_home_dict["year_built"] = int(self.year_built)
         detached_home_dict["number_of_rooms"] = int(self.number_of_rooms)
