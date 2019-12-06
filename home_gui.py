@@ -3,6 +3,7 @@ from tkinter import messagebox
 
 import requests
 from add_condo_popup import AddCondoPopup
+from add_detached_home_popup import AddDetachedHomePopup
 from update_condo_popup import UpdateCondoPopup
 # from add_truck_popup import AddTruckPopup
 # from sell_popup import SellPopup
@@ -96,7 +97,8 @@ class MainAppController(tk.Frame):
         if selection == "condo":
             self._popup = AddCondoPopup(self._popup_win, self._close_home_cb)
         elif selection == "detached home":
-            print("DETACHED HOME ADD")
+            self._popup = AddDetachedHomePopup(self._popup_win, self._close_home_cb)
+            # print("DETACHED HOME ADD")
         else:
             print("Home type not found")
 
