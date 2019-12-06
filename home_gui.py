@@ -5,6 +5,7 @@ import requests
 from add_condo_popup import AddCondoPopup
 from add_detached_home_popup import AddDetachedHomePopup
 from update_condo_popup import UpdateCondoPopup
+from updated_detached_home import UpdateDetachedHomePopup
 # from add_truck_popup import AddTruckPopup
 # from sell_popup import SellPopup
 # from remove_popup import RemovePopup
@@ -40,6 +41,8 @@ class MainAppController(tk.Frame):
 
         self.add_home_btn = tk.Button(self, text="Add "+self.specific.get().upper(), command=self._add_home)
         self.add_home_btn.grid(row=3, column=3)
+        self.detail_home_btn = tk.Button(self, text="Details "+self.specific.get().upper(), command=self._details_home)
+        self.detail_home_btn.grid(row=4, column=3)
         self.delete_home_btn = tk.Button(self, text="Delete Home", command=self._delete_home)
         self.delete_home_btn.grid(row=4, column=4)
         self.update_home_btn = tk.Button(self, text="Update Home", command=self._update_home)
@@ -122,7 +125,8 @@ class MainAppController(tk.Frame):
         if selection == "condo":
             self._popup = UpdateCondoPopup(home["id"], self._popup_win, self._close_home_cb)
         elif selection == "detached home":
-            print("DETACHED HOME UPDATE")
+            self._popup = UpdateDetachedHomePopup(home["id"], self._popup_win, self._close_home_cb)
+            # print("DETACHED HOME UPDATE")
         else:
             print("Home type not found")
 
@@ -148,6 +152,25 @@ class MainAppController(tk.Frame):
             response = requests.delete("http://127.0.0.1:5000/homemanager/homes/" + str(home["id"]))
             # print(home)
             self._update_homes_list()
+
+    def _details_home(self):
+        """ Displays details for the selected home """
+        selection = self._homes_listbox.curselection()
+
+        if selection is None or len(selection) == 0:
+            messagebox.showwarning("Warning", "No home selected to show details for.")
+            return
+
+        home = self._home_listings[selection[0]]
+
+        # result = messagebox.askyesno("Confirm", "Are you sure you want to delete the home?")
+
+        # if result:
+        response = requests.get("http://127.0.0.1:5000/homemanager/homes/" + str(home["id"]))
+        # print(response.text)
+        messagebox.showinfo("Details for id: "+str(home["id"]), response.text)
+            # print(home)
+        self._update_homes_list()
 
     def _update_homes_stats(self):
         """ Update the Home Listing Statistics """
