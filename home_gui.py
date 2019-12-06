@@ -1,6 +1,6 @@
 import tkinter as tk
 import requests
-# from add_car_popup import AddCarPopup
+from add_condo_popup import AddCondoPopup
 # from add_truck_popup import AddTruckPopup
 # from sell_popup import SellPopup
 # from remove_popup import RemovePopup
@@ -34,7 +34,7 @@ class MainAppController(tk.Frame):
         tk.Radiobutton(self, text="Condo", variable=specific, value="condo", command=self._update_listings).grid(row=4,column=1)
         tk.Radiobutton(self, text="Detached Home", variable=specific, value="detached home", command=self._update_listings).grid(row=4,column=2)
 
-        # tk.Button(self, text="Add Car", command=self._add_car).grid(row=3, column=1)
+        tk.Button(self, text="Add"+self.specific.get(), command=self._add_home).grid(row=3, column=3)
         # tk.Button(self, text="Add Truck", command=self._add_truck).grid(row=3, column=2)
         # tk.Button(self, text="Sell Vehicle", command=self._sell_vehicle).grid(row=3, column=3)
         # tk.Button(self, text="Remove Vehicle", command=self._remove_vehicle).grid(row=3, column=4)
@@ -78,6 +78,23 @@ class MainAppController(tk.Frame):
         """ Update the List of Home Descriptions """
         self._update_homes_stats()
         self._update_listings()
+
+    def _add_home(self):
+        """ Add Home Popup """
+        selection = self.specific.get()
+        self._popup_win = tk.Toplevel()
+
+        if selection == "condo":
+            self._popup = AddCondoPopup(self._popup_win, self._close_home_cb)
+        elif selection == "detached home":
+            print("DETACHED HOME ADD")
+        else:
+            print("Home type not found")
+
+    def _close_home_cb(self):
+        """ Close Add Home Popup """
+        self._popup_win.destroy()
+        self._update_homes_list()
 
     # def _update_homes_list(self):
     #     """ Update the List of Home Descriptions """
