@@ -59,7 +59,7 @@ class Condo(AbstractHome):
         # condo_dict["pets_allowed"] = bool(self.pets_allowed)
         condo_dict["pets_allowed"] = int(self.pets_allowed)
         condo_dict["type"] = self.home_type
-        detached_home_dict["id"] = int(self.home_id)
+        condo_dict["id"] = int(self.home_id)
         # if self.get_id() is not None:
             # condo_dict["id"] = self.get_id()
 

@@ -123,7 +123,7 @@ class AbstractHome(Base):
 
     def get_years_old(self):
         """ Returns the age of a home object, assuming the current year is 2019 """
-        years_old = AbstractHome.CURRENT_YEAR - self.get_year_built()
+        years_old = AbstractHome.CURRENT_YEAR - self.year_built
         return years_old
 
     def get_description(self):

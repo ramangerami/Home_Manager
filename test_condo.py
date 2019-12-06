@@ -9,7 +9,7 @@ class TestCondo(unittest.TestCase):
 
     def setUp(self):
         """ Creates a test fixture before each method is run """
-        self.condo = Condo(6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.condo = Condo(1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
         self.assertIsNotNone(self.condo, "Condo must be defined.")
         self.logPoint()
     
@@ -25,50 +25,51 @@ class TestCondo(unittest.TestCase):
 
     def test_condo_constructor_valid(self):
         """ 010A - Valid constructor parameters """
-        self.assertEqual(self.condo.get_square_footage(), 6000, "Condo must have valid square footage")
-        self.assertEqual(self.condo.get_year_built(), 1999, "Condo must have valid year built")
-        self.assertEqual(self.condo.get_number_of_rooms(), 4, "Condo must have valid number of rooms")
-        self.assertEqual(self.condo.get_number_of_bathrooms(), 2, "Condo must have valid number of bathrooms")
-        self.assertEqual(self.condo.get_city(), "Vancouver", "Condo must have valid city")
-        self.assertEqual(self.condo.get_selling_agent(), "Adrian Gekko", "Condo must have valid agent")
-        self.assertEqual(self.condo.get_yearly_property_tax(), 12.5, "Condo must have valid tax")
-        self.assertEqual(self.condo.get_type(), "condo", "Condo must be a condo")
-        self.assertEqual(self.condo.get_monthly_strata_fee(), 800, "Condo must have valid monthly fee")
-        self.assertEqual(self.condo.get_pets_allowed(), False, "Condo must have valid pets allowed flag")
+        self.assertEqual(self.condo.square_footage, 6000, "Condo must have valid square footage")
+        self.assertEqual(self.condo.year_built, 1999, "Condo must have valid year built")
+        self.assertEqual(self.condo.number_of_rooms, 4, "Condo must have valid number of rooms")
+        self.assertEqual(self.condo.number_of_bathrooms, 2, "Condo must have valid number of bathrooms")
+        self.assertEqual(self.condo.city, "Vancouver", "Condo must have valid city")
+        self.assertEqual(self.condo.selling_agent, "Adrian Gekko", "Condo must have valid agent")
+        self.assertEqual(self.condo.yearly_property_tax, 12.5, "Condo must have valid tax")
+        self.assertEqual(self.condo.home_type, "condo", "Condo must be a condo")
+        self.assertEqual(self.condo.monthly_strata_fee, 800, "Condo must have valid monthly fee")
+        self.assertEqual(self.condo.get_pets_allowed_bool(), False, "Condo must have valid pets allowed flag")
 
     def test_condo_constructor_undefined(self):
         """ 010B - Invalid undefined None constructor parameters """
         undefined_input = None
         # Must reject undefined parameter
-        self.assertRaisesRegex(ValueError, "Square Footage cannot be undefined", Condo, undefined_input, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Year Build cannot be undefined", Condo, 6000, undefined_input, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Number of Rooms cannot be undefined", Condo, 6000, 1999, undefined_input, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Number of Bathrooms cannot be undefined", Condo, 6000, 1999, 4, undefined_input, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "City Name cannot be undefined", Condo, 6000, 1999, 4, 2, undefined_input, "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be undefined", Condo, 6000, 1999, 4, 2, "Vancouver", undefined_input, 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Yearly Property Tax cannot be undefined", Condo, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", undefined_input, 800, False)
-        self.assertRaisesRegex(ValueError, "Monthly Fee cannot be undefined", Condo, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, undefined_input, False)
-        self.assertRaisesRegex(ValueError, "Pets Allowed cannot be undefined", Condo, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, undefined_input)
+        self.assertRaisesRegex(ValueError, "Home ID cannot be undefined", Condo, undefined_input, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Square Footage cannot be undefined", Condo, 1, undefined_input, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Year Build cannot be undefined", Condo, 1, 6000, undefined_input, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Number of Rooms cannot be undefined", Condo, 1, 6000, 1999, undefined_input, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Number of Bathrooms cannot be undefined", Condo, 1, 6000, 1999, 4, undefined_input, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "City Name cannot be undefined", Condo, 1, 6000, 1999, 4, 2, undefined_input, "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be undefined", Condo, 1, 6000, 1999, 4, 2, "Vancouver", undefined_input, 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Yearly Property Tax cannot be undefined", Condo, 1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", undefined_input, 800, False)
+        self.assertRaisesRegex(ValueError, "Monthly Fee cannot be undefined", Condo, 1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, undefined_input, False)
+        self.assertRaisesRegex(ValueError, "Pets Allowed cannot be undefined", Condo, 1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, undefined_input)
     
     def test_condo_constructor_invalid(self):
         """ 010C - Invalid other constructor parameters """
         test_string = "Hello"
         test_int = 5
         # Must reject parameter of incorrect type
-        self.assertRaisesRegex(ValueError, "Square Footage must be of type: Integer", Condo, test_string, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Year Build must be of type: Integer", Condo, 6000, test_string, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Number of Rooms must be of type: Integer", Condo, 6000, 1999, test_string, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Number of Bathrooms must be of type: Integer", Condo, 6000, 1999, 4, test_string, "Vancouver", "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "City Name must be of type: String", Condo, 6000, 1999, 4, 2, test_int, "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Selling Agent Name must be of type: String", Condo, 6000, 1999, 4, 2, "Vancouver", test_int, 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Yearly Property Tax must be of type: Float", Condo, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", test_string, 800, False)
-        self.assertRaisesRegex(ValueError, "Monthly Fee must be of type: Integer", Condo, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, test_string, False)
-        self.assertRaisesRegex(ValueError, "Pets Allowed must be of type: Boolean", Condo, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, test_string)
+        self.assertRaisesRegex(ValueError, "Square Footage must be of type: Integer", Condo, 1, test_string, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Year Build must be of type: Integer", Condo, 1, 6000, test_string, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Number of Rooms must be of type: Integer", Condo, 1, 6000, 1999, test_string, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Number of Bathrooms must be of type: Integer", Condo, 1, 6000, 1999, 4, test_string, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "City Name must be of type: String", Condo, 1, 6000, 1999, 4, 2, test_int, "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Selling Agent Name must be of type: String", Condo, 1, 6000, 1999, 4, 2, "Vancouver", test_int, 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Yearly Property Tax must be of type: Float", Condo, 1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", test_string, 800, False)
+        self.assertRaisesRegex(ValueError, "Monthly Fee must be of type: Integer", Condo, 1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, test_string, False)
+        self.assertRaisesRegex(ValueError, "Pets Allowed must be 0 for False or 1 for True.", Condo, 1, 6000, 1999, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, test_string)
 
         empty_string = ""
         # Must reject parameter of empty string
-        self.assertRaisesRegex(ValueError, "City Name cannot be empty string.", Condo, 6000, 1999, 4, 2, empty_string, "Adrian Gekko", 12.5, 800, False)
-        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be empty string.", Condo, 6000, 1999, 4, 2, "Vancouver", empty_string, 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "City Name cannot be empty string.", Condo, 1, 6000, 1999, 4, 2, empty_string, "Adrian Gekko", 12.5, 800, False)
+        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be empty string.", Condo, 1, 6000, 1999, 4, 2, "Vancouver", empty_string, 12.5, 800, False)
 
     # def test_condo_get_id_unset(self):
     #     """ 020A - Get id of an unset home """
@@ -151,11 +152,11 @@ class TestCondo(unittest.TestCase):
 
     def test_get_years_old_non_positive(self):
         """ 140B - Getting years old for a build year on or after current year """
-        condo1 = Condo(6000, 2019, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        condo1 = Condo(1, 6000, 2019, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
         age1 = 2019 - 2019
         self.assertEqual(condo1.get_years_old(), age1)
 
-        condo2 = Condo(6000, 2099, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
+        condo2 = Condo(1, 6000, 2099, 4, 2, "Vancouver", "Adrian Gekko", 12.5, 800, False)
         age2 = 2019 - 2099
         self.assertEqual(condo2.get_years_old(), age2)
 
@@ -169,6 +170,7 @@ class TestCondo(unittest.TestCase):
     def test_to_dict(self):
         """ 160A - Getting the Python Dictionary representation """
         condo_dict = {
+            "id": 1,
             "type": "condo",
             "square_feet": 6000,
             "year_built": 1999,
@@ -178,7 +180,7 @@ class TestCondo(unittest.TestCase):
             "selling_agent": "Adrian Gekko",
             "yearly_property_tax": 12.5,
             "monthly_strata_fee": 800,
-            "pets_allowed": False,
+            "pets_allowed": 0,
             }
         self.assertEqual(self.condo.to_dict(), condo_dict)
 
