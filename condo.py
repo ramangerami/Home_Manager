@@ -14,9 +14,9 @@ class Condo(AbstractHome):
     monthly_strata_fee = Column(Integer)
     pets_allowed = Column(Integer)
 
-    def __init__(self, square_feet, year_built, rooms, bathrooms, city, seller, tax, monthly_fee, pets):
+    def __init__(self, home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, monthly_fee, pets):
         """ Constructor for a Condo object """
-        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax, Condo.CONDO_TYPE)
+        super().__init__(home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, Condo.CONDO_TYPE)
 
         AbstractHome._validate_int_input(Condo.MONTHLY_FEE_LABEL, monthly_fee)
         self.monthly_strata_fee = monthly_fee

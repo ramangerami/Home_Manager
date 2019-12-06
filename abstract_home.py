@@ -46,8 +46,11 @@ class AbstractHome(Base):
     # sold_price = Column(Float)
     # type = Column(String(5))
 
-    def __init__(self,square_feet, year_built, rooms, bathrooms, city, seller, tax, type):
+    def __init__(self, home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, type):
         """ Constructor for an Abstract Home Object """
+
+        AbstractHome._validate_int_input(AbstractHome.HOME_ID_LABEL, home_id)
+        self.home_id = home_id
 
         AbstractHome._validate_int_input(AbstractHome.SQUARE_FOOTAGE_LABEL, square_feet)
         self.square_footage = square_feet

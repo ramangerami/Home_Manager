@@ -14,9 +14,9 @@ class DetachedHome(AbstractHome):
     number_of_floors = Column(Integer)
     has_rental_suite = Column(Integer)
 
-    def __init__(self, square_feet, year_built, rooms, bathrooms, city, seller, tax, floors, has_suite):
+    def __init__(self, home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, floors, has_suite):
         """ Constructor for Condo object """
-        super().__init__(square_feet, year_built, rooms, bathrooms, city, seller, tax, DetachedHome.DETACHED_HOME_TYPE)
+        super().__init__(home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, DetachedHome.DETACHED_HOME_TYPE)
 
         AbstractHome._validate_int_input(DetachedHome.FLOORS_LABEL, floors)
         self.number_of_floors = floors
