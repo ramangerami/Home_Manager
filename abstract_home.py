@@ -26,8 +26,8 @@ class AbstractHome(Base):
     year_built          = Column(Integer)
     number_of_rooms     = Column(Integer)
     number_of_bathrooms = Column(Integer)
-    city                = Column(String(STRING_LENGTH))
-    selling_agent       = Column(String(STRING_LENGTH))
+    city                = Column(String(AbstractHome.STRING_LENGTH))
+    selling_agent       = Column(String(AbstractHome.STRING_LENGTH))
     yearly_property_tax = Column(Float)
     home_type           = Column(String(20))
 
@@ -74,7 +74,7 @@ class AbstractHome(Base):
             raise ValueError(AbstractHome.HOME_TYPE_LABEL + "length must be maximum 20 characters long.")
         self.home_type = type
 
-        self.home_id = None
+        # self.home_id = None
 
 # All entity attributes are public (as per SQLAlchemy)
 # so getter and setter methods are no longer required

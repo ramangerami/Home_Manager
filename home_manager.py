@@ -6,7 +6,7 @@ from abstract_home import AbstractHome
 from detached_home import DetachedHome
 from condo import Condo
 
-import json
+# import json
 
 class HomeManager:
     """ Manages Home Objects """
@@ -20,7 +20,7 @@ class HomeManager:
     # def __init__(self):
         """ Constructor for a HomeManager Object """
         # self._home_listings = []
-        self._next_available_id = 0
+        # self._next_available_id = 0
 
         HomeManager._validate_string_input(HomeManager.DB_FILE_NAME_LABEL, db_filename)
         self._db_filename = db_filename
@@ -40,7 +40,8 @@ class HomeManager:
         """ Adds a home to the listings, assigning it a unique id """
         HomeManager._validate_home_input(HomeManager.HOME_OBJECT_LABEL, home)
         # home.set_id(self._next_available_id)
-        home.id = self._next_available_id
+    # home id is automatically added by sql
+        # home.id = self._next_available_id
         # self._home_listings.append(home)
 
         # self._write_homes_to_file()
@@ -51,8 +52,8 @@ class HomeManager:
 
         session.close()
         
-        self._next_available_id += 1
-        return self._next_available_id - 1
+        # self._next_available_id += 1
+        # return self._next_available_id - 1
 
     def get_home_by_id(self, id_number):
         """ Returns a home in the listings based on id, returns none if it doesn't exist in the listings """
@@ -78,8 +79,8 @@ class HomeManager:
         """ Returns list of all homes """
         # return self._home_listings
         homes_listings = []
-        homes_listings.append(self.get_all_homes_by_type("condo"))        
-        homes_listings.append(self.get_all_homes_by_type("detached home"))        
+        homes_listings.extend(self.get_all_homes_by_type("condo"))        
+        homes_listings.extend(self.get_all_homes_by_type("detached home"))        
         return homes_listings
 
 
