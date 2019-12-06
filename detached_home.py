@@ -59,7 +59,7 @@ class DetachedHome(AbstractHome):
         # detached_home_dict["has_rental_suite"] = bool(self.has_rental_suite)
         detached_home_dict["has_rental_suite"] = int(self.has_rental_suite)
         detached_home_dict["type"] = self.home_type
-        detached_home_dict["id"] = int(self.id)
+        detached_home_dict["id"] = int(self.home_id)
         # if self.get_id() is not None:
             # detached_home_dict["id"] = self.get_id()
             
