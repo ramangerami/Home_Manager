@@ -1,4 +1,5 @@
-{	
+{
+	"id": 100,	
 	"square_feet": 1200,
 	"year_built": 2014,
 	"number_of_rooms": 3,
@@ -7,6 +8,6 @@
 	"selling_agent": "Denzel Curry",
 	"yearly_property_tax": 2002.00,
 	"monthly_strata_fee": 650,
-	"pets_allowed": true,
+	"pets_allowed": 1,
 	"type": "condo"
 }
