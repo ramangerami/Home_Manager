@@ -134,9 +134,13 @@ class HomeManager:
 
         # print("updating:", replacement_home)
         try:
-            self.delete_home(old_home.id)
+            # print("deleting old", old_home.home_id)
+            self.delete_home(old_home.home_id)
+            # print("replacing with new")
             self.add_home(replacement_home)
+            # print("complete!")
         except Exception as e:
+            # print("undoing")
             self.add_home(old_home)
         # session.commit()
 

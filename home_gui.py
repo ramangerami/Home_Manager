@@ -3,6 +3,7 @@ from tkinter import messagebox
 
 import requests
 from add_condo_popup import AddCondoPopup
+from update_condo_popup import UpdateCondoPopup
 # from add_truck_popup import AddTruckPopup
 # from sell_popup import SellPopup
 # from remove_popup import RemovePopup
@@ -39,6 +40,7 @@ class MainAppController(tk.Frame):
         self.add_home_btn = tk.Button(self, text="Add "+self.specific.get().upper(), command=self._add_home)
         self.add_home_btn.grid(row=3, column=3)
         tk.Button(self, text="Delete Home", command=self._delete_home).grid(row=4, column=4)
+        tk.Button(self, text="Update Home", command=self._update_home).grid(row=3, column=1)
 
         # tk.Button(self, text="Add Truck", command=self._add_truck).grid(row=3, column=2)
         # tk.Button(self, text="Sell Vehicle", command=self._sell_vehicle).grid(row=3, column=3)
@@ -98,8 +100,28 @@ class MainAppController(tk.Frame):
         else:
             print("Home type not found")
 
+    def _update_home(self):
+        """ Add Home Popup """
+        selection = self.specific.get()
+        self._popup_win = tk.Toplevel()
+        cursor = self._homes_listbox.curselection()
+
+        if cursor is None or len(cursor) == 0:
+            messagebox.showwarning("Warning", "No home selected to update.")
+            return
+
+        home = self._home_listings[cursor[0]]
+
+
+        if selection == "condo":
+            self._popup = UpdateCondoPopup(home["id"], self._popup_win, self._close_home_cb)
+        elif selection == "detached home":
+            print("DETACHED HOME ADD")
+        else:
+            print("Home type not found")
+
     def _close_home_cb(self):
-        """ Close Add Home Popup """
+        """ Close Edit Home Popup """
         self._popup_win.destroy()
         self._update_homes_list()
 
