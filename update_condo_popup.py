@@ -6,7 +6,7 @@ import requests
 class UpdateCondoPopup(tk.Frame):
     """ Popup frame to add a condo """
 
-    def __init__(self, parent, close_callback):
+    def __init__(self, id, parent, close_callback):
         """ Constructor method """
 
         tk.Frame.__init__(self, parent)
@@ -40,12 +40,13 @@ class UpdateCondoPopup(tk.Frame):
         tk.Label(self, text="Pets Allowed:").grid(row=9, column=1)
         self._pets_allowed = tk.Entry(self)
         self._pets_allowed.grid(row=9, column=2)
-        tk.Label(self, text="Type:").grid(row=10, column=1)
-        self._type = tk.Entry(self)
-        self._type.grid(row=10, column=2)
-        tk.Label(self, text="ID:").grid(row=10, column=1)
-        self._home_id = tk.Entry(self)
-        self._home_id.grid(row=10, column=2)
+        # tk.Label(self, text="Type:").grid(row=10, column=1)
+        # self._type = tk.Entry(self)
+        # self._type.grid(row=10, column=2)
+        self._home_id = id
+        # tk.Label(self, text="ID:").grid(row=10, column=1)
+        # self._home_id = tk.Entry(self)
+        # self._home_id.grid(row=10, column=2)
         tk.Button(self, text="Submit", command=self._submit_cb).grid(row=11, column=1)
         tk.Button(self, text="Close", command=self._close_cb).grid(row=11, column=2)
 
@@ -65,15 +66,15 @@ class UpdateCondoPopup(tk.Frame):
         data['monthly_strata_fee'] = int(self._monthly_strata_fee.get())
         data['pets_allowed'] = int(self._pets_allowed.get())
         data['type'] = 'condo'
-        data['id'] = int(self._home_id.get())
+        data['id'] = int(self._home_id)
 
-        self._add_condo(data)
+        self._update_condo(data)
 
-    def _add_condo(self, data):
+    def _update_condo(self, data):
         headers = {"content-type": "application/json"}
-        response = requests.post("http://127.0.0.1:5000/homemanager/homes", json=data, headers=headers)
+        response = requests.put("http://127.0.0.1:5000/homemanager/homes/"+str(self._home_id), json=data, headers=headers)
 
         if response.status_code == 200:
             self._close_cb()
         else:
-            messagebox.showerror("Error", "Cannot add Condo because" + response.text)
+            messagebox.showerror("Error", "Cannot update Condo because" + response.text)

@@ -65,7 +65,7 @@ class UpdateDetachedHomePopup(tk.Frame):
         data['yearly_property_tax'] = float(self._yearly_property_tax.get())
         data['has_rental_suite'] = int(self._has_rental_suite.get())
         data['number_of_floors'] = int(self._number_of_floors.get())
-        data['type'] = 'condo'
+        data['type'] = 'detached home'
         data['id'] = int(self._home_id)
 
         self._update_detached_home(data)

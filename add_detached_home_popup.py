@@ -53,7 +53,7 @@ class AddDetachedHomePopup(tk.Frame):
 
 
     def _submit_cb(self):
-        """ Submit the Add Condo """
+        """ Submit the Add Detached Home """
         data = {}
         data['square_feet'] = int(self.square_footage.get())
         data['year_built'] = int(self.year_built.get())
