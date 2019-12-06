@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import messagebox
+
 import requests
 from add_condo_popup import AddCondoPopup
 # from add_truck_popup import AddTruckPopup
@@ -34,7 +36,10 @@ class MainAppController(tk.Frame):
         tk.Radiobutton(self, text="Condo", variable=specific, value="condo", command=self._update_listings).grid(row=4,column=1)
         tk.Radiobutton(self, text="Detached Home", variable=specific, value="detached home", command=self._update_listings).grid(row=4,column=2)
 
-        tk.Button(self, text="Add"+self.specific.get(), command=self._add_home).grid(row=3, column=3)
+        self.add_home_btn = tk.Button(self, text="Add "+self.specific.get().upper(), command=self._add_home)
+        self.add_home_btn.grid(row=3, column=3)
+        tk.Button(self, text="Delete Home", command=self._delete_home).grid(row=4, column=4)
+
         # tk.Button(self, text="Add Truck", command=self._add_truck).grid(row=3, column=2)
         # tk.Button(self, text="Sell Vehicle", command=self._sell_vehicle).grid(row=3, column=3)
         # tk.Button(self, text="Remove Vehicle", command=self._remove_vehicle).grid(row=3, column=4)
@@ -48,29 +53,31 @@ class MainAppController(tk.Frame):
         """ Changes the listing based on the Radio selection """
         selection = self.specific.get()
         self.selection_label['text'] = selection
+        self.add_home_btn['text'] = "Add "+selection.upper()
         # print(selection)
         response = requests.get("http://127.0.0.1:5000/homemanager/homes/descriptions/"+selection)
 
         if response.status_code != 200:
-
             messagebox.showwarning("Warning", "Could not retrieve the homes.")
+            return
+        self._home_listings.clear()
+        self._homes_listbox.delete(0, tk.END)
+        data = response.json()
+        for home in data:
+            self._home_listings.append(home)
+            self._homes_listbox.insert(tk.END, home)
 
+        response = requests.get("http://127.0.0.1:5000/homemanager/homes/all/"+selection)
+
+        if response.status_code != 200:
+            messagebox.showwarning("Warning", "Could not retrieve the homes.")
             return
 
         self._home_listings.clear()
-
-        self._homes_listbox.delete(0, tk.END)
-
         data = response.json()
-
         num = 1
-
         for home in data:
-
             self._home_listings.append(home)
-
-            self._homes_listbox.insert(tk.END, home)
-
             num += 1
 
 
@@ -96,28 +103,23 @@ class MainAppController(tk.Frame):
         self._popup_win.destroy()
         self._update_homes_list()
 
-    # def _update_homes_list(self):
-    #     """ Update the List of Home Descriptions """
-    #     self.Home.delete(0, tk.END)
 
-    #     response = requests.get("http://127.0.0.1:5000/carlot/vehicles/descriptions/car")
-    #     for vehicle in response.json():
-    #         self._vehicle_listbox.insert(tk.END, vehicle)
+    def _delete_home(self):
+        """ Deletes the selected home """
+        selection = self._homes_listbox.curselection()
 
-    #     if response.status_code != 200:
-    #         messagebox.showwarning("Warning", "Could not retrieve the homes.")
-    #         return
+        if selection is None or len(selection) == 0:
+            messagebox.showwarning("Warning", "No home selected to delete.")
+            return
 
-    #     # response = requests.get("http://127.0.0.1:5000/carlot/vehicles/descriptions/truck")
+        home = self._home_listings[selection[0]]
 
-    #     for vehicle in response.json():
-    #         self._vehicle_listbox.insert(tk.END, vehicle)
+        result = messagebox.askyesno("Confirm", "Are you sure you want to delete the home?")
 
-    #     if response.status_code != 200:
-    #         messagebox.showwarning("Warning", "Could not retrieve the homes.")
-    #         return
-
-    #     # self._update_homes_stats()
+        if result:
+            response = requests.delete("http://127.0.0.1:5000/homemanager/homes/" + str(home["id"]))
+            # print(home)
+            self._update_homes_list()
 
     def _update_homes_stats(self):
         """ Update the Home Listing Statistics """
