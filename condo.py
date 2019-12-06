@@ -11,8 +11,8 @@ class Condo(AbstractHome):
     CONDO_TYPE = 'condo'
 
     # booleans are represented as Integer 0 and 1
-    monthly_strata_fee = Column(Integer)
-    pets_allowed = Column(Integer)
+    monthly_strata_fee = Column(Integer, nullable=False)
+    pets_allowed       = Column(Integer, nullable=False)
 
     def __init__(self, home_id, square_feet, year_built, rooms, bathrooms, city, seller, tax, monthly_fee, pets):
         """ Constructor for a Condo object """
