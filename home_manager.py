@@ -45,6 +45,9 @@ class HomeManager:
         # self._home_listings.append(home)
 
         # self._write_homes_to_file()
+        if self.get_home_by_id(home.home_id) is not None:
+            raise ValueError("Home ID already exists.")
+
         session = self._db_session()
 
         session.add(home)
@@ -65,10 +68,13 @@ class HomeManager:
         # return next((home for home in self._home_listings if home.get_id() == id_number), None)
         session = self._db_session()
 
-        home = session.query(Condo).filter(Condo.id == id_number).first()
-
-        if home is None:
-            home = session.query(DetachedHome).filter(DetachedHome.id == id_number).first()
+        home = session.query(AbstractHome).filter(AbstractHome.home_id == id_number).first()
+        if home.type == Condo.CONDO_TYPE:
+            home = session.query(Condo).filter(Condo.home_id == id_number).first()
+        elif home.type == DetachedHome.DETACHED_HOME_TYPE:
+            home = session.query(DetachedHome).filter(DetachedHome.home_id == id_number).first()
+        else:
+            raise ValueError("The type of home you are trying to find is nto supported")
 
         session.close() 
 
@@ -79,8 +85,8 @@ class HomeManager:
         """ Returns list of all homes """
         # return self._home_listings
         homes_listings = []
-        homes_listings.extend(self.get_all_homes_by_type("condo"))        
-        homes_listings.extend(self.get_all_homes_by_type("detached home"))        
+        homes_listings.extend(self.get_all_homes_by_type(Condo.CONDO_TYPE))        
+        homes_listings.extend(self.get_all_homes_by_type(DetachedHome.DETACHED_HOME_TYPE))        
         return homes_listings
 
 
@@ -90,16 +96,12 @@ class HomeManager:
         if home_type not in ["condo", "detached home"]:
             raise ValueError("Home Type is invalid")
         results = []
-        # for home in self._home_listings:
-        #     if home.get_type() == home_type:
-        #         results.append(home)
-        # do i need to filter by type?
         if home_type == Condo.CONDO_TYPE:
-            results = session.query(Condo).all()
+            results = session.query(Condo).filter(Condo.type == Condo.CONDO_TYPE).all()
         elif home_type == DetachedHome.DETACHED_HOME_TYPE:
-            results = session.query(DetachedHome).all()
-        # else:
-        #     results = []
+            results = session.query(DetachedHome).filter(DetachedHome.type == DetachedHome.CONDO_TYPE).all()
+        else:
+            raise ValueError("Home Type is invalid")
 
         session.close()
         return results
@@ -145,11 +147,22 @@ class HomeManager:
         HomeManager._validate_int_input(HomeManager.HOME_ID_LABEL, home_id)
         if self.get_home_by_id(home_id) is None:
             raise ValueError("Given Home's ID must match one in the listings to delete.")
-        for home in self._home_listings:
-            if home.get_id() == home_id:
-                self._home_listings.remove(home)
-                # self._write_homes_to_file()
-                break
+        # for home in self._home_listings:
+        #     if home.get_id() == home_id:
+        #         self._home_listings.remove(home)
+        #         # self._write_homes_to_file()
+        #         break
+        session = self._db_session()
+        home = session.query(AbstractHome).filter(AbstractHome.home_id == home_id).first()
+
+        if home is None:
+            session.close()
+            raise ValueError("Home ID does not exist.")
+
+        session.delete(home)
+        session.commit()
+        session.close()
+
 
     def get_listing_stats(self):
         """ Generates a HomeStats from a listing of homes """
@@ -157,12 +170,14 @@ class HomeManager:
         detached_homes = 0
         condos = 0
         years_list = []
-        for home in self._home_listings:
+
+        home_listings = self.get_all_homes()
+        for home in home_listings:
             total_homes += 1
             years_list.append(home.get_years_old())
-            if home.get_type() == DetachedHome.DETACHED_HOME_TYPE:
+            if home.type == DetachedHome.DETACHED_HOME_TYPE:
                 detached_homes += 1
-            elif home.get_type() == Condo.CONDO_TYPE:
+            elif home.type == Condo.CONDO_TYPE:
                 condos += 1
         years = 0
         if len(years_list) > 0:
