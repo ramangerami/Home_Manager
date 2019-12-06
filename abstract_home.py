@@ -22,14 +22,14 @@ class AbstractHome(Base):
 
     STRING_LENGTH = 100
     home_id             = Column(Integer, primary_key=True)
-    square_footage      = Column(Integer)
-    year_built          = Column(Integer)
-    number_of_rooms     = Column(Integer)
-    number_of_bathrooms = Column(Integer)
-    city                = Column(String(AbstractHome.STRING_LENGTH))
-    selling_agent       = Column(String(AbstractHome.STRING_LENGTH))
-    yearly_property_tax = Column(Float)
-    home_type           = Column(String(20))
+    square_footage      = Column(Integer, nullable=False)
+    year_built          = Column(Integer, nullable=False)
+    number_of_rooms     = Column(Integer, nullable=False)
+    number_of_bathrooms = Column(Integer, nullable=False)
+    city                = Column(String(AbstractHome.STRING_LENGTH), nullable=False)
+    selling_agent       = Column(String(AbstractHome.STRING_LENGTH), nullable=False)
+    yearly_property_tax = Column(Float, nullable=False)
+    home_type           = Column(String(20), nullable=False)
 
 # vehicles from lab 9 for reference
     # id = Column(Integer, primary_key=True)
