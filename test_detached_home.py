@@ -9,7 +9,7 @@ class TestDetachedHome(unittest.TestCase):
 
     def setUp(self):
         """ Creates a test fixture before each method is run """
-        self.detached_home = DetachedHome(12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 3, True)
+        self.detached_home = DetachedHome(2, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 3, True)
         self.assertIsNotNone(self.detached_home, "Detached Home must be defined.")
         self.logPoint()
     
@@ -25,50 +25,50 @@ class TestDetachedHome(unittest.TestCase):
 
     def test_detached_home_constructor_valid(self):
         """ 010A - Valid constructor parameters """
-        self.assertEqual(self.detached_home.get_square_footage(), 12000, "Detached Home must have valid square footage")
-        self.assertEqual(self.detached_home.get_year_built(), 2010, "Detached Home must have valid year built")
-        self.assertEqual(self.detached_home.get_number_of_rooms(), 18, "Detached Home must have valid number of rooms")
-        self.assertEqual(self.detached_home.get_number_of_bathrooms(), 3, "Detached Home must have valid number of bathrooms")
-        self.assertEqual(self.detached_home.get_city(), "Richmond", "Detached Home must have valid city")
-        self.assertEqual(self.detached_home.get_selling_agent(), "Camelia Stewart", "Detached Home must have valid agent")
-        self.assertEqual(self.detached_home.get_yearly_property_tax(), 0.25, "Detached Home must have valid tax")
-        self.assertEqual(self.detached_home.get_type(), "detached home", "Detached Home must be a detached home")
-        self.assertEqual(self.detached_home.get_number_of_floors(), 3, "Detached Home must have valid Number of Floors")
-        self.assertEqual(self.detached_home.get_has_rental_suite(), True, "Detached Home must have valid Has Suite flag")
+        self.assertEqual(self.detached_home.square_footage, 12000, "Detached Home must have valid square footage")
+        self.assertEqual(self.detached_home.year_built, 2010, "Detached Home must have valid year built")
+        self.assertEqual(self.detached_home.number_of_rooms, 18, "Detached Home must have valid number of rooms")
+        self.assertEqual(self.detached_home.number_of_bathrooms, 3, "Detached Home must have valid number of bathrooms")
+        self.assertEqual(self.detached_home.city, "Richmond", "Detached Home must have valid city")
+        self.assertEqual(self.detached_home.selling_agent, "Camelia Stewart", "Detached Home must have valid agent")
+        self.assertEqual(self.detached_home.yearly_property_tax, 0.25, "Detached Home must have valid tax")
+        self.assertEqual(self.detached_home.home_type, "detached home", "Detached Home must be a detached home")
+        self.assertEqual(self.detached_home.number_of_floors, 3, "Detached Home must have valid Number of Floors")
+        self.assertEqual(self.detached_home.get_has_rental_suite_bool(), True, "Detached Home must have valid Has Suite flag")
 
     def test_detached_home_constructor_undefined(self):
         """ 010B - Invalid undefined None constructor parameters """
         undefined_input = None
         # Must reject undefined parameter
-        self.assertRaisesRegex(ValueError, "Square Footage cannot be undefined", DetachedHome, undefined_input, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Year Build cannot be undefined", DetachedHome, 12000, undefined_input, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Number of Rooms cannot be undefined", DetachedHome, 12000, 2010, undefined_input, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Number of Bathrooms cannot be undefined", DetachedHome, 12000, 2010, 18, undefined_input, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "City Name cannot be undefined", DetachedHome, 12000, 2010, 18, 3, undefined_input, "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be undefined", DetachedHome, 12000, 2010, 18, 3, "Richmond", undefined_input, 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Yearly Property Tax cannot be undefined", DetachedHome, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", undefined_input, 800, True)
-        self.assertRaisesRegex(ValueError, "Number of Floors cannot be undefined", DetachedHome, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, undefined_input, True)
-        self.assertRaisesRegex(ValueError, "Has Suite cannot be undefined", DetachedHome, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, undefined_input)
+        self.assertRaisesRegex(ValueError, "Square Footage cannot be undefined", DetachedHome, 1, undefined_input, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Year Build cannot be undefined", DetachedHome, 1, 12000, undefined_input, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Number of Rooms cannot be undefined", DetachedHome, 1, 12000, 2010, undefined_input, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Number of Bathrooms cannot be undefined", DetachedHome, 1, 12000, 2010, 18, undefined_input, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "City Name cannot be undefined", DetachedHome, 1, 12000, 2010, 18, 3, undefined_input, "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be undefined", DetachedHome, 1, 12000, 2010, 18, 3, "Richmond", undefined_input, 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Yearly Property Tax cannot be undefined", DetachedHome, 1, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", undefined_input, 800, True)
+        self.assertRaisesRegex(ValueError, "Number of Floors cannot be undefined", DetachedHome, 1, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, undefined_input, True)
+        self.assertRaisesRegex(ValueError, "Has Suite cannot be undefined", DetachedHome, 1, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, undefined_input)
     
     def test_detached_home_constructor_invalid(self):
         """ 010C - Invalid other constructor parameters """
         test_string = "Hello"
         test_int = 5
         # Must reject parameter of incorrect type
-        self.assertRaisesRegex(ValueError, "Square Footage must be of type: Integer", DetachedHome, test_string, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Year Build must be of type: Integer", DetachedHome, 12000, test_string, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Number of Rooms must be of type: Integer", DetachedHome, 12000, 2010, test_string, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Number of Bathrooms must be of type: Integer", DetachedHome, 12000, 2010, 18, test_string, "Richmond", "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "City Name must be of type: String", DetachedHome, 12000, 2010, 18, 3, test_int, "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Selling Agent Name must be of type: String", DetachedHome, 12000, 2010, 18, 3, "Richmond", test_int, 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Yearly Property Tax must be of type: Float", DetachedHome, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", test_string, 800, True)
-        self.assertRaisesRegex(ValueError, "Number of Floors must be of type: Integer", DetachedHome, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, test_string, True)
-        self.assertRaisesRegex(ValueError, "Has Suite must be of type: Boolean", DetachedHome, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, test_string)
+        self.assertRaisesRegex(ValueError, "Square Footage must be of type: Integer", DetachedHome, 2, test_string, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Year Build must be of type: Integer", DetachedHome, 2, 12000, test_string, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Number of Rooms must be of type: Integer", DetachedHome, 2, 12000, 2010, test_string, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Number of Bathrooms must be of type: Integer", DetachedHome, 2, 12000, 2010, 18, test_string, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "City Name must be of type: String", DetachedHome, 2, 12000, 2010, 18, 3, test_int, "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Selling Agent Name must be of type: String", DetachedHome, 2, 12000, 2010, 18, 3, "Richmond", test_int, 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Yearly Property Tax must be of type: Float", DetachedHome, 2, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", test_string, 800, True)
+        self.assertRaisesRegex(ValueError, "Number of Floors must be of type: Integer", DetachedHome, 2, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, test_string, True)
+        self.assertRaisesRegex(ValueError, "Has Suite must be 0 for False or 1 for True.", DetachedHome, 2, 12000, 2010, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, test_string)
 
         empty_string = ""
         # Must reject parameter of empty string
-        self.assertRaisesRegex(ValueError, "City Name cannot be empty string.", DetachedHome, 12000, 2010, 18, 3, empty_string, "Camelia Stewart", 0.25, 800, True)
-        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be empty string.", DetachedHome, 12000, 2010, 18, 3, "Richmond", empty_string, 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "City Name cannot be empty string.", DetachedHome, 2, 12000, 2010, 18, 3, empty_string, "Camelia Stewart", 0.25, 800, True)
+        self.assertRaisesRegex(ValueError, "Selling Agent Name cannot be empty string.", DetachedHome, 2, 12000, 2010, 18, 3, "Richmond", empty_string, 0.25, 800, True)
 
     # def test_detached_home_get_id_unset(self):
     #     """ 020A - Get id of an unset home """
@@ -151,11 +151,11 @@ class TestDetachedHome(unittest.TestCase):
 
     def test_get_years_old_non_positive(self):
         """ 140B - Getting years old for a build year on or after current year """
-        detached_home1 = DetachedHome(12000, 2019, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        detached_home1 = DetachedHome(1, 12000, 2019, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
         age1 = 2019 - 2019
         self.assertEqual(detached_home1.get_years_old(), age1)
 
-        detached_home2 = DetachedHome(12000, 2099, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
+        detached_home2 = DetachedHome(1, 12000, 2099, 18, 3, "Richmond", "Camelia Stewart", 0.25, 800, True)
         age2 = 2019 - 2099
         self.assertEqual(detached_home2.get_years_old(), age2)
 
@@ -169,6 +169,7 @@ class TestDetachedHome(unittest.TestCase):
     def test_to_dict(self):
         """ 160A - Getting the Python Dictionary representation """
         detached_home_dict = {
+            "id": 2,
             "type": "detached home",
             "square_feet": 12000,
             "year_built": 2010,
@@ -178,7 +179,7 @@ class TestDetachedHome(unittest.TestCase):
             "selling_agent": "Camelia Stewart",
             "yearly_property_tax": 0.25,
             "number_of_floors": 3,
-            "has_rental_suite": True,
+            "has_rental_suite": 1,
             }
         self.assertEqual(self.detached_home.to_dict(), detached_home_dict)
 
