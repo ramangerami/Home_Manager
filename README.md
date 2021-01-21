@@ -1,4 +1,4 @@
-# Home Manager is a home inventory management system developed in Python using OOP practices and architected using RESTful API standards. It is a multi-tiered application which includes a database, server and GUI.
+## Home Manager is a home inventory management system developed in Python using OOP practices and architected using RESTful API standards. It is a multi-tiered application which includes a database, server and GUI.
 
 # How to run this Python application
 
